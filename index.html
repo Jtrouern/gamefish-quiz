@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game Fish ID Quiz</title>
+<meta name="description" content="Identify North American freshwater and saltwater game fish by state, using live iNaturalist research-grade photos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: an angler's field guide, confident and outdoorsy, quick to play
+   IDEA: a tackle-box field card; deep-water header band, photo plate, answer buttons like lure tags
+   PICTURE: the live iNaturalist photo, large, on a dark "live well" plate
+   COLOUR and TYPE: deep lake teal + pale water ground + lure-orange accent; Zilla Slab titles, Source Sans 3 body
+   LAYOUT: controls strip, then photo plate with choices beside it (stacked on phones), field guide grid as a second tab */
+:root{color-scheme:light dark;
+ --bg:light-dark(#eaf2f0,#0a181c);--panel:light-dark(#ffffff,#11262c);--ink:light-dark(#10262d,#e3eeec);
+ --muted:light-dark(#4d6268,#9db3b5);--line:light-dark(#cfdedb,#22404a);--deep:#0e3a44;--deep2:#0a2a32;
+ --accent:#e8641c;--accent-ink:#fff;--good:light-dark(#1d8455,#3fbf80);--bad:light-dark(#c2362b,#ef6a5c);--plate:#081418}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Source Sans 3",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Zilla Slab",Georgia,serif;line-height:1.08;margin:0;text-wrap:balance}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(4vw,16px)}
+header{background:linear-gradient(180deg,var(--deep),var(--deep2));color:#eaf6f4;position:relative;overflow:hidden}
+header .wrap{display:flex;align-items:center;gap:20px;padding-top:22px;padding-bottom:22px}
+header h1{font-size:clamp(28px,4.4vw,44px)}
+header p{margin:4px 0 0;color:#b9d6d3;max-width:60ch}
+header svg{flex:none;width:clamp(90px,14vw,150px);height:auto}
+.controls{background:var(--panel);border-bottom:1px solid var(--line)}
+.controls .wrap{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:end;padding-top:14px;padding-bottom:14px}
+label.f{display:grid;gap:4px;font-size:14px;font-weight:600;color:var(--muted)}
+select,button{font:inherit;font-size:16px}
+select{min-height:44px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);max-width:260px}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{min-height:44px;padding:0 14px;border:0;background:var(--bg);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--deep);color:#fff}
+.btn{min-height:44px;padding:0 20px;border-radius:8px;border:0;background:var(--accent);color:var(--accent-ink);font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.tabs{display:flex;gap:4px;margin-top:20px;border-bottom:1px solid var(--line)}
+.tabs button{min-height:44px;padding:0 16px;border:0;background:none;color:var(--muted);font-weight:700;cursor:pointer;border-bottom:3px solid transparent}
+.tabs button[aria-selected=true]{color:var(--ink);border-color:var(--accent)}
+.status{font-size:15px;color:var(--muted);margin:12px 0;min-height:1.5em}
+.status.err{color:var(--bad)}
+main{padding-bottom:48px}
+.game{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:20px;align-items:start}
+.plate{background:var(--plate);border-radius:12px;aspect-ratio:4/3;position:relative;overflow:hidden;display:grid;place-items:center}
+.plate img{width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .35s}
+.plate img.on{opacity:1}
+.plate .marks{position:absolute;inset:0;display:grid;place-items:center;padding:8%;color:#e8f3f1;font:600 clamp(19px,2.4vw,26px)/1.35 "Zilla Slab",Georgia,serif;text-align:center}
+.plate .marks small{display:block;font:600 14px "Source Sans 3",sans-serif;color:#8fb3b1;margin-bottom:10px}
+.spin{position:absolute;width:44px;height:44px;border:4px solid #ffffff33;border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(1turn)}}
+@media(prefers-reduced-motion:reduce){.spin{animation:none}.plate img{transition:none}}
+.credit{font-size:13px;color:var(--muted);margin-top:6px;overflow-wrap:anywhere}
+.side{display:grid;gap:14px}
+.meter{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:600}
+.meter b{font-family:"Zilla Slab",serif;font-size:24px}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.choices{display:grid;gap:10px}
+.choices button{min-height:52px;text-align:left;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;display:flex;gap:10px;align-items:center}
+.choices button:hover:not(:disabled){border-color:var(--accent)}
+.choices kbd{flex:none;width:26px;height:26px;border-radius:6px;background:var(--bg);display:grid;place-items:center;font:600 13px "Source Sans 3",sans-serif;color:var(--muted)}
+.choices button.ok{border-color:var(--good);background:color-mix(in srgb,var(--good) 16%,var(--panel))}
+.choices button.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--panel))}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.reveal{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.reveal h3{font-size:24px}.reveal .sci{font-style:italic;color:var(--muted)}
+.reveal p{margin:8px 0}.reveal .wiki{font-size:15px;color:var(--muted)}
+.verdict{font-weight:700}.verdict.ok{color:var(--good)}.verdict.no{color:var(--bad)}
+.links{display:flex;gap:14px;flex-wrap:wrap;font-size:15px;font-weight:600}
+.intro{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:clamp(18px,3vw,32px)}
+.intro h2{font-size:32px;margin-bottom:8px}
+.end ul{columns:2 220px;padding-left:18px}
+.guide{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.card .ph{aspect-ratio:4/3;background:var(--plate)}.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.card .bd{padding:12px 14px;display:grid;gap:6px;flex:1}
+.card h3{font-size:20px}.card .meta{font-size:14px;color:var(--muted)}
+.card p{margin:0;font-size:15px}
+.sechead{grid-column:1/-1;font-size:26px;margin-top:12px}
+details{margin-top:20px}summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}
+footer{border-top:1px solid var(--line);font-size:14px;color:var(--muted);padding:20px 0 32px}
+[hidden]{display:none!important}
+@media(max-width:820px){.game{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){header svg{display:none}.controls .wrap>*{flex:1 1 100%}select{max-width:none;width:100%}.seg button{flex:1}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <svg viewBox="0 0 160 90" aria-hidden="true">
+   <path d="M0 70 Q20 62 40 70 T80 70 T120 70 T160 70" fill="none" stroke="#5fa8a3" stroke-width="2" opacity=".6"/>
+   <path d="M0 80 Q20 72 40 80 T80 80 T120 80 T160 80" fill="none" stroke="#5fa8a3" stroke-width="2" opacity=".35"/>
+   <path d="M22 40 C45 14 98 12 122 38 L150 20 L144 42 L150 62 L122 46 C98 70 45 66 22 40 Z" fill="#1f6b6a"/>
+   <path d="M22 40 C45 14 98 12 122 38 C96 30 52 30 22 40 Z" fill="#2d8a86"/>
+   <path d="M60 22 L74 6 L86 20 Z" fill="#1f6b6a"/>
+   <path d="M30 40 C55 48 95 50 120 42" fill="none" stroke="#e8641c" stroke-width="2.5"/>
+   <circle cx="38" cy="36" r="3.4" fill="#eaf6f4"/><circle cx="38" cy="36" r="1.6" fill="#0a2a32"/>
+  </svg>
+  <div>
+   <h1>Game Fish ID Quiz</h1>
+   <p>Name North America's game fish from live iNaturalist research-grade photos and field marks, filtered by state, water type and field-guide section.</p>
+  </div>
+ </div>
+</header>
+
+<div class="controls">
+ <div class="wrap">
+  <label class="f">State or province<select id="place"></select></label>
+  <div class="f" style="display:grid;gap:4px;font-size:14px;font-weight:600;color:var(--muted)">Water
+   <div class="seg" id="water" role="group" aria-label="Water type">
+    <button data-w="f" aria-pressed="true">Freshwater</button><button data-w="s" aria-pressed="false">Saltwater</button><button data-w="a" aria-pressed="false">Both</button>
+   </div>
+  </div>
+  <label class="f">Field guide section<select id="section"></select></label>
+  <label class="f">Question type<select id="mode"><option value="photo">Photo ID</option><option value="marks">Field marks</option><option value="mix">Mixed</option></select></label>
+  <label class="f">Rounds<select id="rounds"><option>10</option><option>20</option><option value="0">Endless</option></select></label>
+  <button class="btn" id="start">Load &amp; play</button>
+ </div>
+</div>
+
+<main class="wrap">
+ <div class="tabs" role="tablist">
+  <button role="tab" id="tab-quiz" aria-selected="true">Quiz</button>
+  <button role="tab" id="tab-guide" aria-selected="false">Field guide</button>
+ </div>
+ <div class="status" id="status" role="status"></div>
+
+ <section id="quiz">
+  <div class="intro" id="intro">
+   <h2>Pick your water and cast off</h2>
+   <p>Choose a state or province, freshwater or saltwater, and a field-guide section, then press <b>Load &amp; play</b>. The game asks iNaturalist which game fish have research-grade records there and quizzes you on real observation photos from that place. Anadromous fish such as salmon, striped bass and shad count as both fresh and salt.</p>
+   <p>Keys: <b>1–6</b> to answer, <b>H</b> for a hint, <b>Enter</b> for the next fish.</p>
+  </div>
+  <div class="game" id="game" hidden>
+   <div>
+    <div class="plate" id="plate"><div class="spin" id="spin"></div><img id="photo" alt=""><div class="marks" id="marks" hidden></div></div>
+    <div class="credit" id="credit"></div>
+   </div>
+   <div class="side">
+    <div class="meter"><span>Fish <b id="qn">1</b><span id="qof"></span></span><span>Score <b id="score">0</b></span><span>Streak <b id="streak">0</b></span></div>
+    <div class="bar"><i id="prog"></i></div>
+    <div class="choices" id="choices"></div>
+    <div class="row"><button class="btn ghost" id="hint">Hint (H)</button><button class="btn ghost" id="quit">End round</button></div>
+    <div class="reveal" id="reveal" hidden></div>
+   </div>
+  </div>
+  <div class="intro end" id="end" hidden></div>
+ </section>
+
+ <section id="guide" hidden>
+  <div class="guide" id="cards"></div>
+  <details id="absent" hidden><summary></summary><p id="absentList"></p></details>
+ </section>
+</main>
+
+<footer>
+ <div class="wrap">
+  Photos and occurrence data: <a href="https://www.inaturalist.org">iNaturalist</a> community observations (research grade, Creative Commons licensed; each photo credits its observer). Summaries: <a href="https://en.wikipedia.org">Wikipedia</a>. More species data: <a href="https://www.fishbase.se">FishBase</a>. "Recorded here" means at least one research-grade iNaturalist observation, not a complete range map; check your state's fishing regulations before keeping fish.
+ </div>
+</footer>
+
+<script>
+{
+// ---------- Species list: section|habitat(f fresh, s salt, b both)|Common name|scientific names;synonyms|field marks
+const RAW = `
+trout|f|Brook Trout|Salvelinus fontinalis|Wormy olive markings on the back, red spots with blue halos, and a white leading edge on the lower fins.
+trout|f|Brown Trout|Salmo trutta|Golden-brown body with black and red spots, often haloed in pale blue; tail has few or no spots.
+trout|b|Rainbow Trout|Oncorhynchus mykiss|Pink-red band along the side with small black spots over the body and tail. The sea-run form is the steelhead.
+trout|f|Cutthroat Trout|Oncorhynchus clarkii;Oncorhynchus clarkii lewisi|Red-orange slash under the lower jaw; spots heaviest toward the tail.
+trout|f|Lake Trout|Salvelinus namaycush|Pale cream spots on a gray-green body and a deeply forked tail.
+trout|f|Bull Trout|Salvelinus confluentus|Pale yellow to pink spots on an olive body, no black spots, and a broad flat head.
+trout|b|Dolly Varden|Salvelinus malma|Small pink-red spots on olive sides; slimmer head than a bull trout.
+trout|b|Arctic Char|Salvelinus alpinus|Char of the far north; pale to red spots, and spawners turn brilliant orange-red below.
+trout|f|Arctic Grayling|Thymallus arcticus|Huge sail-like dorsal fin edged and spotted with iridescent color.
+trout|b|Chinook Salmon|Oncorhynchus tshawytscha|Black gums and lower jaw; black spots on both lobes of the tail.
+trout|b|Coho Salmon|Oncorhynchus kisutch|White gums with a dark mouth; spots only on the upper lobe of the tail.
+trout|b|Sockeye Salmon|Oncorhynchus nerka|Spawners turn scarlet with an olive-green head; few distinct spots.
+trout|b|Pink Salmon|Oncorhynchus gorbuscha|Large oval black spots on the tail; spawning males grow a tall hump.
+trout|b|Chum Salmon|Oncorhynchus keta|Spawners show calico purple and green vertical bars and large canine teeth.
+trout|b|Atlantic Salmon|Salmo salar|Black X-shaped spots mostly above the lateral line; slender tail base and slightly forked tail.
+trout|f|Lake Whitefish|Coregonus clupeaformis|Small head, blunt snout overhanging the mouth, silvery body with a slight hump behind the head.
+trout|f|Mountain Whitefish|Prosopium williamsoni|Small mouth under a pointed snout, large scales and a round, silvery body.
+bass|f|Largemouth Bass|Micropterus nigricans;Micropterus salmoides|Upper jaw extends past the eye; dark blotchy stripe along the side; deep notch between the dorsal fins.
+bass|f|Florida Bass|Micropterus salmoides floridanus;Micropterus floridanus|Southeastern relative of the largemouth, nearly identical outwardly; known by range and genetics.
+bass|f|Smallmouth Bass|Micropterus dolomieu|Bronze to brown with vertical bars; jaw ends at or before the middle of the red eye.
+bass|f|Spotted Bass|Micropterus punctulatus|Rows of small dark spots below the lateral line and a jaw ending near the back of the eye.
+bass|f|Bluegill|Lepomis macrochirus|All-dark "ear" flap with no colored edge and a dark blotch at the rear of the soft dorsal fin.
+bass|f|Pumpkinseed|Lepomis gibbosus|Ear flap tipped with a bright red-orange spot; wavy blue lines across the cheek.
+bass|f|Redear Sunfish|Lepomis microlophus|Ear flap edged in red or orange; plain cheeks and no dorsal blotch. Also called shellcracker.
+bass|f|Green Sunfish|Lepomis cyanellus|Big mouth for a sunfish, blue-green wavy cheek lines, and yellow-edged fins.
+bass|f|Redbreast Sunfish|Lepomis auritus|Long, narrow, all-black ear flap and an orange-red breast.
+bass|f|Longear Sunfish|Lepomis megalotis|Long ear flap edged in white, with orange and turquoise marbling.
+bass|f|Warmouth|Lepomis gulosus|Dark streaks radiating back from the red eye, large mouth, mottled brown body.
+bass|f|Black Crappie|Pomoxis nigromaculatus|Irregular black speckling all over; usually 7–8 dorsal spines.
+bass|f|White Crappie|Pomoxis annularis|Faint vertical bars rather than speckles; usually 6 dorsal spines.
+bass|f|Rock Bass|Ambloplites rupestris|Ruby-red eye, rows of dark spots along the sides, and 6 anal-fin spines.
+perch|f|Walleye|Sander vitreus|Glassy, light-gathering eyes, a white tip on the lower lobe of the tail, and a dark blotch at the rear of the spiny dorsal fin.
+perch|f|Sauger|Sander canadensis|Rows of black spots on the spiny dorsal fin, dark saddles, and no white tail tip.
+perch|f|Yellow Perch|Perca flavescens|Golden-yellow body with 6–8 dark vertical bars and orange lower fins.
+pike|f|Northern Pike|Esox lucius|Rows of pale bean-shaped spots on a dark green body; cheek fully scaled.
+pike|f|Muskellunge|Esox masquinongy|Dark bars or spots on a light body; lower half of the cheek and gill cover lack scales.
+pike|f|Chain Pickerel|Esox niger|Dark chain-link pattern on the sides and a dark teardrop bar under the eye.
+pike|f|Redfin Pickerel|Esox americanus|Small pickerel with wavy dark bars, reddish lower fins and a dark teardrop under the eye.
+cat|f|Channel Catfish|Ictalurus punctatus|Deeply forked tail, scattered dark spots on young fish, and a rounded anal fin.
+cat|f|Blue Catfish|Ictalurus furcatus|Forked tail, straight-edged anal fin with 30 or more rays, slate-blue color and no spots.
+cat|f|Flathead Catfish|Pylodictis olivaris|Broad flat head, lower jaw jutting past the upper, and a squarish tail.
+cat|f|Brown Bullhead|Ameiurus nebulosus|Square tail, mottled brown sides and dark chin barbels.
+cat|f|Yellow Bullhead|Ameiurus natalis|White or yellowish chin barbels and a rounded tail.
+cat|f|Black Bullhead|Ameiurus melas|Dark chin barbels, a pale bar at the tail base, and a square tail.
+cat|b|White Catfish|Ameiurus catus|Moderately forked tail, white belly and white chin barbels.
+temp|b|Striped Bass|Morone saxatilis|7–8 unbroken dark horizontal stripes and two tooth patches on the back of the tongue.
+temp|f|White Bass|Morone chrysops|Faint, often broken stripes on a deep body; a single tooth patch on the tongue.
+temp|f|Yellow Bass|Morone mississippiensis|Brassy yellow with stripes broken and offset below the lateral line.
+temp|b|White Perch|Morone americana|Silvery olive with no stripes; spiny and soft dorsal fins connected by a membrane.
+rough|f|Longnose Gar|Lepisosteus osseus|Very long, narrow beak, more than twice the length of the rest of the head.
+rough|f|Spotted Gar|Lepisosteus oculatus|Shorter beak and bold dark spots on the head, body and fins.
+rough|b|Alligator Gar|Atractosteus spatula|Broad, short snout with two rows of upper teeth; can exceed 8 feet.
+rough|f|Bowfin|Amia calva;Amia ocellicauda|Long ribbon-like dorsal fin along most of the back; males show an eyespot at the base of the tail.
+rough|f|Common Carp|Cyprinus carpio|Large golden scales and two pairs of barbels at the corners of the mouth.
+rough|f|Grass Carp|Ctenopharyngodon idella|Torpedo-shaped with dark-edged scales in a net pattern; no barbels.
+rough|f|Lake Sturgeon|Acipenser fulvescens|Rows of bony plates (scutes), a shark-like tail and four barbels under a cone-shaped snout.
+rough|b|White Sturgeon|Acipenser transmontanus|North America's largest freshwater fish; gray, with 38–48 scutes along the side.
+rough|b|American Shad|Alosa sapidissima|Silvery herring with a dark shoulder spot followed by smaller spots; jaw reaches past the eye.
+rough|f|Burbot|Lota lota|The freshwater cod: a single chin barbel and long second dorsal and anal fins.
+rough|f|Freshwater Drum|Aplodinotus grunniens|Humped back, rounded tail and a lateral line that runs all the way into the tail.
+rough|f|American Paddlefish|Polyodon spathula|Long, flat, paddle-shaped snout; a giant filter feeder of big rivers.
+drum|s|Red Drum|Sciaenops ocellatus|Copper-bronze body with one or more black spots at the base of the tail.
+drum|s|Black Drum|Pogonias cromis|High-backed with many chin barbels; young fish show 4–5 broad dark vertical bars.
+drum|s|Spotted Seatrout|Cynoscion nebulosus|Round black spots on the back, dorsal fins and tail; one or two big canine teeth up front.
+drum|s|Weakfish|Cynoscion regalis|Fine dark speckles in wavy diagonal rows and yellowish lower fins.
+drum|s|Atlantic Croaker|Micropogonias undulatus|Small chin barbels, a brassy sheen and wavy diagonal bars; it croaks when caught.
+drum|s|White Seabass|Atractoscion nobilis|Pacific drum with a raised ridge along the belly; silvery bronze above.
+snap|s|Red Snapper|Lutjanus campechanus|Rosy red all over with a red eye and a pointed anal fin.
+snap|s|Gray Snapper|Lutjanus griseus|Gray-copper with prominent canine teeth; young fish show a dark stripe through the eye. Also called mangrove snapper.
+snap|s|Mutton Snapper|Lutjanus analis|Olive with a small black spot above the lateral line and blue lines on the face.
+snap|s|Yellowtail Snapper|Ocyurus chrysurus|Bright yellow stripe from snout to the deeply forked yellow tail.
+snap|s|Gag|Mycteroperca microlepis|Gray grouper with dark wormy markings and a slightly concave tail edge.
+snap|s|Red Grouper|Epinephelus morio|Reddish-brown with pale blotches and a straight-edged spiny dorsal fin.
+snap|s|Atlantic Goliath Grouper|Epinephelus itajara|Massive (up to about 800 lb), with a broad head, small eyes and rounded fins; protected.
+jack|s|Crevalle Jack|Caranx hippos|Blunt head, a black spot on the gill cover and a black spot on the pectoral fin.
+jack|s|Greater Amberjack|Seriola dumerili|Dark band from the snout through the eye toward the dorsal fin, plus an amber side stripe.
+jack|s|Permit|Trachinotus falcatus|Tall, deep silver body with long sickle-shaped dorsal and anal fins.
+jack|s|Florida Pompano|Trachinotus carolinus|Smaller and less deep than permit, with a yellow belly and fins.
+jack|s|California Yellowtail|Seriola dorsalis;Seriola lalandi|Pacific jack with a brassy yellow side stripe and a bright yellow tail.
+tuna|s|Atlantic Bluefin Tuna|Thunnus thynnus|Giant tuna with short pectoral fins and yellow finlets edged in black.
+tuna|s|Yellowfin Tuna|Thunnus albacares|Yellow finlets; adults grow long, sickle-shaped yellow second dorsal and anal fins.
+tuna|s|Albacore|Thunnus alalunga|Very long pectoral fins that reach past the start of the anal fin.
+tuna|s|Skipjack Tuna|Katsuwonus pelamis|Dark horizontal stripes on the silvery belly.
+tuna|s|Little Tunny|Euthynnus alletteratus|Wavy wormlike marks on the back and a few dark spots below the pectoral fin.
+tuna|s|Atlantic Bonito|Sarda sarda|Dark stripes slanting down and forward across the back.
+tuna|s|King Mackerel|Scomberomorus cavalla|Lateral line dips sharply below the second dorsal fin; no black on the front of the dorsal.
+tuna|s|Atlantic Spanish Mackerel|Scomberomorus maculatus|Gold-yellow oval spots and black at the front of the spiny dorsal fin.
+tuna|s|Wahoo|Acanthocybium solandri|Long beaklike snout and cobalt-blue tiger bars on a slender body.
+tuna|s|Atlantic Mackerel|Scomber scombrus|Wavy black bars across a green-blue back.
+pel|s|Sailfish|Istiophorus platypterus|Enormous sail-like dorsal fin and a long spear-shaped bill.
+pel|s|Blue Marlin|Makaira nigricans|Cobalt back with pale vertical bars; pointed dorsal fin lower than the body is deep.
+pel|s|Swordfish|Xiphias gladius|Long, flat, sword-shaped bill; adults have no scales and no pelvic fins.
+pel|s|Common Dolphinfish|Coryphaena hippurus|Electric green-gold with a dorsal fin running head to tail; bulls have a blunt forehead. Also called mahi-mahi.
+pel|s|Cobia|Rachycentron canadum|Flat broad head and a dark side stripe; looks like a small shark at the surface.
+pel|b|Atlantic Tarpon|Megalops atlanticus|Huge silver scales, an upturned bony mouth, and a long trailing last dorsal ray.
+pel|s|Bonefish|Albula vulpes|Silver with faint dark stripes and a cone-shaped snout overhanging the mouth.
+pel|b|Common Snook|Centropomus undecimalis|Bold black lateral line running into the tail; sloping forehead and protruding lower jaw.
+pel|s|Bluefish|Pomatomus saltatrix|Blue-green back, razor teeth and a black blotch at the base of the pectoral fin.
+pel|s|Great Barracuda|Sphyraena barracuda|Long and fanged, with scattered black blotches on the lower sides.
+bottom|s|Summer Flounder|Paralichthys dentatus|Left-eyed flatfish with five or more eyespots, often arranged in a triangle near the tail. Also called fluke.
+bottom|s|Southern Flounder|Paralichthys lethostigma|Left-eyed flatfish with diffuse, unringed spots.
+bottom|s|Winter Flounder|Pseudopleuronectes americanus|Right-eyed, thick-bodied flatfish with a small mouth.
+bottom|s|Pacific Halibut|Hippoglossus stenolepis|Right-eyed giant whose lateral line arches high over the pectoral fin.
+bottom|s|California Halibut|Paralichthys californicus|Large mouth reaching past the eye; lateral line arched over the pectoral fin.
+bottom|s|Tautog|Tautoga onitis|Blunt head, thick lips and crushing teeth; mottled dark body. Also called blackfish.
+bottom|s|Black Sea Bass|Centropristis striata|Dark with pale scale centers; big males have a blue hump and a long upper tail ray.
+bottom|s|Scup|Stenotomus chrysops|Flat silvery porgy with a steep forehead and small mouth.
+bottom|s|Sheepshead|Archosargus probatocephalus|5–6 black vertical bars and humanlike front teeth.
+bottom|s|Atlantic Cod|Gadus morhua|Chin barbel, pale lateral line, three dorsal fins and a speckled body.
+bottom|s|Haddock|Melanogrammus aeglefinus|Black lateral line and a dark "thumbprint" blotch above the pectoral fin.
+bottom|s|Pollock|Pollachius virens|Green back, pale lateral line and a jutting lower jaw. Also called saithe.
+bottom|s|Hogfish|Lachnolaimus maximus|Long piglike snout and three long streamer spines at the front of the dorsal fin.
+bottom|s|Lingcod|Ophiodon elongatus|Huge fanged mouth and long dorsal fin; flesh is sometimes blue-green.
+bottom|s|Kelp Bass|Paralabrax clathratus|Pale squarish blotches on a dark back; lives in Pacific kelp forests.
+bottom|s|Black Rockfish|Sebastes melanops|Dark gray-black with a mottled back; often schools in mid-water.
+bottom|s|California Sheephead|Bodianus pulcher;Semicossyphus pulcher|Males have a black head and tail, a red middle and a white chin; strong canine teeth.
+shark|s|Shortfin Mako Shark|Isurus oxyrinchus|Metallic blue with a pointed snout, crescent tail and visible curved teeth.
+shark|s|Blue Shark|Prionace glauca|Slender, indigo-blue, with very long pectoral fins.
+shark|s|Blacktip Shark|Carcharhinus limbatus|Black tips on most fins but not the anal fin.
+shark|b|Bull Shark|Carcharhinus leucas|Stocky, with a short blunt snout; travels far into fresh water.
+shark|s|Tiger Shark|Galeocerdo cuvier|Square snout and dark vertical bars that fade with age.
+shark|s|Great Hammerhead|Sphyrna mokarran|Nearly straight-edged hammer and a very tall sickle-shaped first dorsal fin.
+shark|s|Common Thresher Shark|Alopias vulpinus|Upper tail lobe about as long as the rest of the body.
+shark|s|Spiny Dogfish|Squalus acanthias|Small shark with white spots and a spine in front of each dorsal fin.`;
+
+const SECTIONS = {trout:'Trout, salmon & char',bass:'Black bass & sunfish',perch:'Perch, walleye & sauger',pike:'Pike, pickerel & muskie',cat:'Catfish & bullheads',temp:'Temperate bass',rough:'Gar, bowfin, sturgeon & more',
+ drum:'Drums & croakers',snap:'Snappers & groupers',jack:'Jacks & pompano',tuna:'Tunas & mackerels',pel:'Billfish & inshore gamefish',bottom:'Flatfish & bottomfish',shark:'Sharks'};
+const SPECIES = RAW.trim().split('\n').map((l,i)=>{const [g,h,c,s,t]=l.split('|');return {i,g,h,c,sci:s.split(';'),tip:t}});
+
+const STATES = 'Alabama,Alaska,Arizona,Arkansas,California,Colorado,Connecticut,Delaware,Florida,Georgia,Hawaii,Idaho,Illinois,Indiana,Iowa,Kansas,Kentucky,Louisiana,Maine,Maryland,Massachusetts,Michigan,Minnesota,Mississippi,Missouri,Montana,Nebraska,Nevada,New Hampshire,New Jersey,New Mexico,New York,North Carolina,North Dakota,Ohio,Oklahoma,Oregon,Pennsylvania,Rhode Island,South Carolina,South Dakota,Tennessee,Texas,Utah,Vermont,Virginia,Washington,West Virginia,Wisconsin,Wyoming'.split(',');
+const PROVS = 'Alberta,British Columbia,Manitoba,New Brunswick,Newfoundland and Labrador,Nova Scotia,Ontario,Prince Edward Island,Quebec,Saskatchewan,Yukon,Northwest Territories,Nunavut'.split(',');
+const FIXED = {'United States (all)':1,'Canada (all)':6712};
+
+const API = 'https://api.inaturalist.org/v1/';
+const LIC = 'cc0,cc-by,cc-by-nc,cc-by-sa,cc-by-nd,cc-by-nc-sa,cc-by-nc-nd';
+const $ = id=>document.getElementById(id);
+const esc = s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store = {get(k){try{return JSON.parse(localStorage.getItem('gfq:'+k))}catch(e){return null}},set(k,v){try{localStorage.setItem('gfq:'+k,JSON.stringify(v))}catch(e){}}};
+const shuffle = a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const fmt = n=>Number(n).toLocaleString();
+
+// polite request queue for iNaturalist (about 1 request per second, per their API guidance)
+let last = 0;
+async function api(path){
+ const wait = Math.max(0,last+900-Date.now()); last = Date.now()+wait;
+ if(wait) await new Promise(r=>setTimeout(r,wait));
+ const r = await fetch(API+path,{headers:{Accept:'application/json'}});
+ if(!r.ok) throw new Error('iNaturalist returned '+r.status);
+ return r.json();
+}
+function status(msg,err){const s=$('status');s.textContent=msg||'';s.className='status'+(err?' err':'')}
+
+// ---------- controls
+const settings = Object.assign({place:'Connecticut',water:'f',section:'all',mode:'photo',rounds:'10'},store.get('settings')||{});
+$('place').innerHTML = '<optgroup label="Countries">'+Object.keys(FIXED).map(n=>`<option>${n}</option>`).join('')+'</optgroup>'
+ +'<optgroup label="United States">'+STATES.map(n=>`<option>${n}</option>`).join('')+'</optgroup>'
+ +'<optgroup label="Canada">'+PROVS.map(n=>`<option>${n}</option>`).join('')+'</optgroup>';
+$('place').value = settings.place; $('mode').value = settings.mode; $('rounds').value = settings.rounds;
+const habitatOk = (sp,w)=>w==='a'||sp.h===w||sp.h==='b';
+function setWater(w){settings.water=w;for(const b of $('water').children)b.setAttribute('aria-pressed',b.dataset.w===w);fillSections()}
+function fillSections(){
+ const keys=[...new Set(SPECIES.filter(s=>habitatOk(s,settings.water)).map(s=>s.g))];
+ if(!keys.includes(settings.section)) settings.section='all';
+ $('section').innerHTML='<option value="all">All sections</option>'+keys.map(k=>`<option value="${k}">${SECTIONS[k]}</option>`).join('');
+ $('section').value=settings.section;
+}
+setWater(settings.water);
+$('water').addEventListener('click',e=>{const b=e.target.closest('button');if(b){setWater(b.dataset.w);applyFilter()}});
+$('section').addEventListener('change',()=>{settings.section=$('section').value;applyFilter()});
+$('mode').addEventListener('change',()=>{settings.mode=$('mode').value;store.set('settings',settings)});
+$('rounds').addEventListener('change',()=>{settings.rounds=$('rounds').value;store.set('settings',settings)});
+$('place').addEventListener('change',()=>{settings.place=$('place').value;store.set('settings',settings);present=null;pool=[];absent=[];renderGuide();status('Press Load & play to fetch '+settings.place+'.')});
+
+// ---------- iNaturalist lookups
+async function placeId(name){
+ if(FIXED[name]) return FIXED[name];
+ const cached=store.get('place:'+name); if(cached) return cached;
+ const r=await api('places/autocomplete?per_page=25&q='+encodeURIComponent(name));
+ const nm=name.toLowerCase(), list=r.results||[];
+ const hit=list.find(p=>p.admin_level===10&&p.name.toLowerCase()===nm&&/,\s*(US|CA)$/.test(p.display_name||''))
+  ||list.find(p=>p.admin_level===10&&p.name.toLowerCase()===nm)||list.find(p=>p.name.toLowerCase()===nm);
+ if(!hit) throw new Error('Could not find '+name+' on iNaturalist');
+ store.set('place:'+name,hit.id); return hit.id;
+}
+async function taxonId(name){
+ const cached=store.get('taxon:'+name); if(cached) return cached;
+ const r=await api('taxa?per_page=10&q='+encodeURIComponent(name));
+ const hit=(r.results||[]).find(t=>t.name===name); if(!hit) throw new Error('Could not find taxon '+name);
+ store.set('taxon:'+name,hit.id); return hit.id;
+}
+// which curated species have research-grade records in a place
+async function presence(pid){
+ const key='pres:'+pid, c=store.get(key);
+ if(c&&Date.now()-c.t<7*864e5) return c.m;
+ const ids=[await taxonId('Actinopterygii'),await taxonId('Elasmobranchii')].join(',');
+ const bySci=new Map(), byCommon=new Map();
+ for(let page=1;page<=3;page++){
+  status(`Checking iNaturalist records for ${settings.place}… (page ${page})`);
+  const r=await api(`observations/species_counts?verifiable=true&quality_grade=research&per_page=500&page=${page}&place_id=${pid}&taxon_id=${ids}`);
+  for(const x of r.results||[]){
+   const t=x.taxon, rec={id:t.id,n:x.count,ph:t.default_photo?[t.default_photo.medium_url,t.default_photo.attribution]:null};
+   const add=(k,v)=>{const o=bySci.get(k);if(!o)bySci.set(k,v);else{o.n+=v.n;if(!o.ph)o.ph=v.ph}};
+   add(t.name.toLowerCase(),{...rec});
+   const bi=t.name.split(' ').slice(0,2).join(' ').toLowerCase(); if(bi!==t.name.toLowerCase()) add(bi+'*',{...rec});
+   if(t.preferred_common_name) byCommon.set(t.preferred_common_name.toLowerCase(),rec);
+  }
+  if(!r.results||r.results.length<500) break;
+ }
+ const m={};
+ for(const sp of SPECIES){
+  let hit=null;
+  for(const s of sp.sci){const k=s.toLowerCase();hit=bySci.get(k)||bySci.get(k+'*');if(hit)break}
+  if(!hit) hit=byCommon.get(sp.c.toLowerCase());
+  if(hit) m[sp.i]=hit;
+ }
+ store.set(key,{t:Date.now(),m}); return m;
+}
+const photoCache=new Map();
+async function photos(sp,pid){
+ const k=sp.rec.id+':'+pid; if(photoCache.has(k)) return photoCache.get(k);
+ const q=`observations?taxon_id=${sp.rec.id}&quality_grade=research&photos=true&photo_license=${LIC}&per_page=40&order_by=votes`;
+ let r=await api(q+(pid?`&place_id=${pid}`:'')), list=r.results||[];
+ if(list.length<3&&pid){const r2=await api(q);list=list.concat(r2.results||[])}
+ const out=[];
+ for(const o of list){const p=(o.photos||[])[0];if(p&&p.url)out.push({src:p.url.replace('/square.','/large.'),attr:p.attribution,obs:o.id,where:o.place_guess||''})}
+ photoCache.set(k,out); return out;
+}
+const wikiCache=new Map();
+async function wiki(sp){
+ if(wikiCache.has(sp.i)) return wikiCache.get(sp.i);
+ let res=null;
+ for(const t of [sp.sci[0],sp.c]){
+  try{const r=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(t.replace(/ /g,'_')));
+   if(r.ok){const j=await r.json();if(j.type!=='disambiguation'&&j.extract){res={text:j.extract,url:j.content_urls?.desktop?.page};break}}}catch(e){}
+ }
+ wikiCache.set(sp.i,res); return res;
+}
+
+// ---------- pool
+let present=null, pid=null, pool=[], absent=[];
+function applyFilter(){
+ store.set('settings',settings);
+ if(!present) return;
+ const ok=SPECIES.filter(s=>habitatOk(s,settings.water)&&(settings.section==='all'||s.g===settings.section));
+ pool=ok.filter(s=>present[s.i]).map(s=>({...s,rec:present[s.i]}));
+ absent=ok.filter(s=>!present[s.i]);
+ renderGuide();
+}
+async function load(){
+ $('start').disabled=true;
+ try{
+  status('Finding '+settings.place+' on iNaturalist…');
+  pid=await placeId(settings.place);
+  present=await presence(pid);
+  applyFilter();
+  if(pool.length<2){status(`Only ${pool.length} matching game fish recorded in ${settings.place}. Try another section, water type or place.`,true);return false}
+  status(`${pool.length} game fish with research-grade records in ${settings.place}.`);
+  return true;
+ }catch(e){status(e.message+'. Check your connection and try again.',true);return false}
+ finally{$('start').disabled=false}
+}
+
+// ---------- quiz
+let G=null;
+function nChoices(){return Math.min(settings.section==='all'?4:6,Math.max(pool.length,2))}
+function distractors(sp,n){
+ const same=shuffle(pool.filter(s=>s.i!==sp.i&&s.g===sp.g)), other=shuffle(pool.filter(s=>s.i!==sp.i&&s.g!==sp.g));
+ return same.concat(other).slice(0,n-1);
+}
+async function startGame(){
+ if(!await load()) return;
+ const rounds=+settings.rounds;
+ G={rounds,i:0,score:0,streak:0,right:0,missed:[],deck:shuffle(pool),answered:false,hint:false};
+ $('intro').hidden=true;$('end').hidden=true;$('game').hidden=false;showTab('quiz');
+ next();
+}
+function draw(){ if(!G.deck.length) G.deck=shuffle(pool); return G.deck.pop() }
+async function next(){
+ if(G.rounds&&G.i>=G.rounds) return finish();
+ G.i++;G.answered=false;G.hint=false;
+ const sp=draw(); G.cur=sp;
+ $('qn').textContent=G.i;$('qof').textContent=G.rounds?' / '+G.rounds:'';
+ $('prog').style.width=G.rounds?((G.i-1)/G.rounds*100)+'%':'0';
+ $('reveal').hidden=true;$('hint').disabled=false;
+ const opts=shuffle([sp,...distractors(sp,nChoices())]);
+ G.opts=opts;
+ $('choices').innerHTML=opts.map((s,k)=>`<button data-k="${k}"><kbd>${k+1}</kbd><span>${esc(s.c)}</span></button>`).join('');
+ let mode=settings.mode==='mix'?(Math.random()<.65?'photo':'marks'):settings.mode;
+ const img=$('photo'),mk=$('marks');img.classList.remove('on');$('credit').textContent='';
+ if(mode==='photo'){
+  mk.hidden=true;$('spin').hidden=false;
+  try{
+   const ph=await photos(sp,pid);
+   if(G.cur!==sp) return;
+   if(!ph.length) throw new Error('no photos');
+   const p=ph[Math.random()*ph.length|0]; G.photo=p;
+   img.onload=()=>{if(G.cur===sp){img.classList.add('on');$('spin').hidden=true}};
+   img.onerror=()=>{$('spin').hidden=true;showMarks(sp)};
+   img.alt='Mystery fish photo from iNaturalist'; img.src=p.src;
+   $('credit').textContent='Photo '+(p.attr||'')+' · iNaturalist';
+  }catch(e){if(G.cur===sp){$('spin').hidden=true;showMarks(sp)}}
+ }else showMarks(sp);
+ // warm the cache for the next fish
+ const nx=G.deck[G.deck.length-1]; if(nx&&settings.mode!=='marks') photos(nx,pid).catch(()=>{});
+}
+function showMarks(sp){
+ G.photo=null;$('photo').removeAttribute('src');$('photo').alt='';
+ const mk=$('marks');mk.hidden=false;mk.innerHTML=`<div><small>Field marks · ${esc(SECTIONS[sp.g])}</small>${esc(sp.tip)}</div>`;
+ $('hint').disabled=true;
+}
+$('hint').addEventListener('click',giveHint);
+function giveHint(){
+ if(!G||G.answered||G.hint||$('hint').disabled) return;
+ G.hint=true;$('hint').disabled=true;
+ $('reveal').hidden=false;$('reveal').innerHTML=`<p><b>Hint:</b> ${esc(G.cur.tip)}</p><p class="wiki">Hints halve this fish's points.</p>`;
+}
+$('choices').addEventListener('click',e=>{const b=e.target.closest('button');if(b)answer(+b.dataset.k)});
+async function answer(k){
+ if(!G||G.answered||!G.opts[k]) return;
+ G.answered=true;
+ const sp=G.cur,pick=G.opts[k],ok=pick.i===sp.i;
+ [...$('choices').children].forEach((b,j)=>{b.disabled=true;if(G.opts[j].i===sp.i)b.classList.add('ok');else if(j===k)b.classList.add('no')});
+ if(ok){G.right++;G.streak++;G.score+=Math.round((100+Math.min(G.streak-1,10)*10)*(G.hint?.5:1))}
+ else{G.streak=0;G.missed.push(sp)}
+ $('score').textContent=fmt(G.score);$('streak').textContent=G.streak;
+ $('prog').style.width=G.rounds?(G.i/G.rounds*100)+'%':'0';
+ const p=G.photo, sciUrl=sp.sci[0].replace(/ /g,'-');
+ $('reveal').hidden=false;
+ $('reveal').innerHTML=`<p class="verdict ${ok?'ok':'no'}">${ok?'Correct!':'Not quite. You picked '+esc(pick.c)+'.'}</p>
+  <h3>${esc(sp.c)}</h3><div class="sci">${esc(sp.sci[0])} · ${esc(SECTIONS[sp.g])}</div>
+  <p><b>Field marks:</b> ${esc(sp.tip)}</p>
+  <p class="wiki">${fmt(sp.rec.n)} research-grade iNaturalist records in ${esc(settings.place)}.${p&&p.where?' This photo: '+esc(p.where)+'.':''}</p>
+  <p class="wiki" id="wk">Loading Wikipedia summary…</p>
+  <div class="links">${p?`<a href="https://www.inaturalist.org/observations/${+p.obs}" target="_blank" rel="noopener">Observation</a>`:''}
+   <a href="https://www.inaturalist.org/taxa/${+sp.rec.id}" target="_blank" rel="noopener">iNaturalist</a>
+   <a href="https://www.fishbase.se/summary/${encodeURIComponent(sciUrl)}.html" target="_blank" rel="noopener">FishBase</a></div>
+  <div class="row" style="margin-top:12px"><button class="btn" id="nextBtn">${G.rounds&&G.i>=G.rounds?'See results':'Next fish'} (Enter)</button></div>`;
+ $('nextBtn').addEventListener('click',next);$('nextBtn').focus({preventScroll:true});
+ const w=await wiki(sp); const el=$('wk');
+ if(el&&G.cur===sp){
+  if(w){const t=w.text.length>320?w.text.slice(0,320).replace(/\s+\S*$/,'')+'…':w.text;el.innerHTML=esc(t)+(w.url?` <a href="${esc(w.url)}" target="_blank" rel="noopener">Wikipedia</a>`:'')}
+  else el.textContent='';
+ }
+}
+function finish(){
+ const key=`best:${settings.place}:${settings.water}:${settings.section}:${settings.mode}:${G.rounds}`;
+ const best=Math.max(store.get(key)||0,G.score); store.set(key,best);
+ const n=G.rounds||G.i, acc=Math.round(G.right/Math.max(n,1)*100);
+ $('game').hidden=true;$('end').hidden=false;
+ const miss=[...new Map(G.missed.map(s=>[s.i,s])).values()];
+ $('end').innerHTML=`<h2>${acc>=90?'Master angler':acc>=70?'Seasoned angler':acc>=40?'Weekend angler':'Keep casting'}: ${fmt(G.score)} points</h2>
+  <p>${G.right} of ${n} correct (${acc}%) · Best for these settings: <b>${fmt(best)}</b></p>
+  ${miss.length?`<h3 style="font-size:22px;margin-top:14px">Study these</h3><ul>${miss.map(s=>`<li><b>${esc(s.c)}</b>: ${esc(s.tip)}</li>`).join('')}</ul>`:'<p>Clean sheet. Try a harder section or another state.</p>'}
+  <div class="row" style="margin-top:12px"><button class="btn" id="again">Play again</button><button class="btn ghost" id="toGuide">Open field guide</button></div>`;
+ $('again').addEventListener('click',startGame);$('toGuide').addEventListener('click',()=>showTab('guide'));
+ G=null;
+}
+$('quit').addEventListener('click',()=>{if(G){G.rounds=G.i-(G.answered?0:1);if(G.rounds<1){G=null;$('game').hidden=true;$('intro').hidden=false;return}finish()}});
+$('start').addEventListener('click',startGame);
+document.addEventListener('keydown',e=>{
+ if(!G||$('game').hidden||e.target.tagName==='SELECT') return;
+ if(/^[1-6]$/.test(e.key)) answer(+e.key-1);
+ else if(e.key==='h'||e.key==='H') giveHint();
+ else if(e.key==='Enter'&&G.answered){e.preventDefault();next()}
+});
+
+// ---------- field guide
+function renderGuide(){
+ const groups={};for(const s of pool)(groups[s.g]=groups[s.g]||[]).push(s);
+ $('cards').innerHTML=pool.length?Object.keys(SECTIONS).filter(g=>groups[g]).map(g=>`<h2 class="sechead">${SECTIONS[g]}</h2>`+groups[g].sort((a,b)=>b.rec.n-a.rec.n).map(s=>`
+  <article class="card"><div class="ph">${s.rec.ph?`<img loading="lazy" src="${esc(s.rec.ph[0])}" alt="${esc(s.c)}" title="${esc(s.rec.ph[1])}">`:''}</div>
+  <div class="bd"><h3>${esc(s.c)}</h3><div class="meta"><i>${esc(s.sci[0])}</i> · ${fmt(s.rec.n)} records here · ${s.h==='b'?'fresh & salt':s.h==='f'?'freshwater':'saltwater'}</div>
+  <p>${esc(s.tip)}</p>
+  <div class="links"><a href="https://www.inaturalist.org/taxa/${+s.rec.id}" target="_blank" rel="noopener">iNaturalist</a><a href="https://en.wikipedia.org/wiki/${encodeURIComponent(s.sci[0].replace(/ /g,'_'))}" target="_blank" rel="noopener">Wikipedia</a><a href="https://www.fishbase.se/summary/${encodeURIComponent(s.sci[0].replace(/ /g,'-'))}.html" target="_blank" rel="noopener">FishBase</a></div>
+  </div></article>`).join('')).join(''):'<p>No matching game fish recorded here yet. Press <b>Load &amp; play</b> or change the filters.</p>';
+ $('absent').hidden=!absent.length;
+ $('absent').querySelector('summary').textContent=`${absent.length} game fish in this filter with no research-grade records in ${settings.place}`;
+ $('absentList').textContent=absent.map(s=>s.c).join(' · ');
+}
+function showTab(t){
+ $('tab-quiz').setAttribute('aria-selected',t==='quiz');$('tab-guide').setAttribute('aria-selected',t==='guide');
+ $('quiz').hidden=t!=='quiz';$('guide').hidden=t!=='guide';
+}
+$('tab-quiz').addEventListener('click',()=>showTab('quiz'));
+$('tab-guide').addEventListener('click',async()=>{showTab('guide');if(!present||pid!==(FIXED[settings.place]||store.get('place:'+settings.place)))await load();});
+}
+</script>
+</body>
+</html>
