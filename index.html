@@ -269,7 +269,13 @@ const onChecklist=sp=>COUNTRY[settings.place]?(sp.cn||[]).includes(COUNTRY[setti
 // photos: local research grade, then research grade anywhere, then any verifiable, then the taxon's own photos
 const photoCache=new Map();
 async function photos(sp,pid){
- if(!sp.inat) return [];
+ if(!sp.inat){
+  for(const s of sp.sci){
+   const r=await api('taxa?rank=species&per_page=30&q='+encodeURIComponent(s)), t=(r.results||[]).find(x=>x.name.toLowerCase()===s.toLowerCase());
+   if(t){sp.inat=t.id;break}
+  }
+  if(!sp.inat) return [];
+ }
  const k=sp.inat+':'+pid; if(photoCache.has(k)) return photoCache.get(k);
  const base=`observations?taxon_id=${sp.inat}&photos=true&photo_license=${LIC}&per_page=40&order_by=votes`;
  const grab=(r,local)=>(r.results||[]).flatMap(o=>{const p=(o.photos||[])[0];return p&&p.url?[{src:p.url.replace('/square.','/large.'),attr:p.attribution,obs:o.id,where:o.place_guess||'',local}]:[]});
