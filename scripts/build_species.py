@@ -73,6 +73,14 @@ FAM_SECTION = {
     "Ariidae": "bottom", "Merlucciidae": "bottom", "Malacanthidae": "bottom", "Balistidae": "bottom", "Ephippidae": "bottom",
     "Lamnidae": "shark", "Carcharhinidae": "shark", "Sphyrnidae": "shark", "Alopiidae": "shark", "Squalidae": "shark",
     "Triakidae": "shark", "Odontaspididae": "shark", "Ginglymostomatidae": "shark", "Hexanchidae": "shark",
+    "Carchariidae": "shark", "Scyliorhinidae": "shark", "Echinorhinidae": "shark", "Somniosidae": "shark", "Centrophoridae": "shark",
+    "Rajidae": "shark", "Dasyatidae": "shark", "Myliobatidae": "shark", "Pristidae": "shark", "Rhinobatidae": "shark",
+    "Gymnuridae": "shark", "Urotrygonidae": "shark", "Torpedinidae": "shark",
+    "Embiotocidae": "bottom", "Latilidae": "bottom", "Phycidae": "bottom", "Anoplopomatidae": "bottom", "Scorpaenidae": "bottom",
+    "Triglidae": "bottom", "Priacanthidae": "bottom", "Polyprionidae": "bottom", "Stereolepididae": "bottom", "Lobotidae": "bottom",
+    "Kyphosidae": "bottom", "Girellidae": "bottom", "Lophiidae": "bottom", "Anarhichadidae": "bottom", "Cottidae": "bottom",
+    "Belonidae": "pel", "Gempylidae": "pel", "Trichiuridae": "pel", "Bramidae": "pel", "Nematistiidae": "pel", "Echeneidae": "pel",
+    "Centrolophidae": "pel", "Stromateidae": "pel", "Mugilidae": "pel", "Chanidae": "pel", "Scombropidae": "pel",
 }
 FRESH_SECTIONS = {"trout", "bass", "perch", "pike", "cat", "temp", "rough"}
 
@@ -90,8 +98,12 @@ def clean(txt, words):
     txt = re.sub(r"\(Ref\.[^)]*\)", "", txt or "")
     for w in words:
         if w: txt = re.sub(re.escape(w), "this fish", txt, flags=re.I)
-    txt = re.sub(r"\s+", " ", txt).strip()
-    return txt[:400]
+    txt = re.sub(r"^\s*(Description|Diagnosis)\s*:\s*", "", txt, flags=re.I)
+    txt = re.sub(r"^\s*(Distinguished|Characterized|Diagnosed) by the following (characteristics|characters)\s*:\s*", "", txt, flags=re.I)
+    txt = re.sub(r"\s+([.,;:])", r"\1", re.sub(r"\s+", " ", txt)).strip()
+    if len(txt) > 400: txt = txt[:400].rsplit(" ", 1)[0] + "…"
+    if txt: txt = txt[0].upper() + txt[1:]
+    return txt
 
 records, used = [], set()
 def add(sci_names, r, cur=None):
@@ -149,6 +161,8 @@ for rec in records:
     hit = None
     for s in rec["sci"]:
         res = inat(s); time.sleep(1.1)
+        if not res:  # empty answer (network or rate limit): wait and ask once more
+            time.sleep(10); res = inat(s)
         hit = next((t for t in res if t["name"].lower() == s.lower() and t["rank"] in ("species", "subspecies", "hybrid")), None) \
            or next((t for t in res if (t.get("matched_term") or "").lower() == s.lower() and t["rank"] == "species"), None)
         if hit: break
