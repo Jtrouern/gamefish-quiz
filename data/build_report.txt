@@ -1,0 +1,9 @@
+FishBase version v25.04
+FishBase species in US/Canada: 3326
+species with FishBase diagnosis text: 18776
+curated: 124  total records: 586
+no iNaturalist match: Sarda sarda
+no iNaturalist match: Pristis perotteti
+iNaturalist unmatched: 2
+written 583 species; by section: {'trout': 27, 'bass': 24, 'perch': 5, 'pike': 4, 'cat': 7, 'temp': 4, 'rough': 58, 'drum': 18, 'snap': 45, 'jack': 26, 'tuna': 21, 'pel': 23, 'bottom': 124, 'shark': 36, 'other': 161}
+by habitat: {'f': 96, 'b': 72, 's': 415}
