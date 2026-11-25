@@ -1,0 +1,777 @@
+versions: v19.04, v21.06, v23.01, v23.05, v24.07, v25.04
+SQL: DESCRIBE SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/species.parquet'
+column_name | column_type | null | key | default | extra
+SpecCode | INTEGER | YES | None | None | None
+Genus | VARCHAR | YES | None | None | None
+Species | VARCHAR | YES | None | None | None
+SpeciesRefNo | INTEGER | YES | None | None | None
+Author | VARCHAR | YES | None | None | None
+FBname | VARCHAR | YES | None | None | None
+PicPreferredName | VARCHAR | YES | None | None | None
+PicPreferredNameM | VARCHAR | YES | None | None | None
+PicPreferredNameF | VARCHAR | YES | None | None | None
+PicPreferredNameJ | VARCHAR | YES | None | None | None
+FamCode | INTEGER | YES | None | None | None
+Subfamily | VARCHAR | YES | None | None | None
+GenCode | INTEGER | YES | None | None | None
+SubGenCode | INTEGER | YES | None | None | None
+BodyShapeI | VARCHAR | YES | None | None | None
+Source | VARCHAR | YES | None | None | None
+AuthorRef | INTEGER | YES | None | None | None
+Remark | VARCHAR | YES | None | None | None
+TaxIssue | TINYINT | YES | None | None | None
+Fresh | TINYINT | YES | None | None | None
+Brack | TINYINT | YES | None | None | None
+Saltwater | TINYINT | YES | None | None | None
+DemersPelag | VARCHAR | YES | None | None | None
+AirBreathing | VARCHAR | YES | None | None | None
+AirBreathingRef | INTEGER | YES | None | None | None
+AnaCat | VARCHAR | YES | None | None | None
+MigratRef | INTEGER | YES | None | None | None
+DepthRangeShallow | SMALLINT | YES | None | None | None
+DepthRangeDeep | SMALLINT | YES | None | None | None
+DepthRangeRef | INTEGER | YES | None | None | None
+DepthRangeComShallow | SMALLINT | YES | None | None | None
+DepthRangeComDeep | SMALLINT | YES | None | None | None
+DepthComRef | INTEGER | YES | None | None | None
+LongevityWild | FLOAT | YES | None | None | None
+LongevityWildRef | INTEGER | YES | None | None | None
+LongevityCaptive | FLOAT | YES | None | None | None
+LongevityCapRef | INTEGER | YES | None | None | None
+Vulnerability | DOUBLE | YES | None | None | None
+VulnerabilityClimate | DOUBLE | YES | None | None | None
+Length | FLOAT | YES | None | None | None
+LTypeMaxM | VARCHAR | YES | None | None | None
+LengthFemale | FLOAT | YES | None | None | None
+LTypeMaxF | VARCHAR | YES | None | None | None
+MaxLengthRef | INTEGER | YES | None | None | None
+CommonLength | FLOAT | YES | None | None | None
+LTypeComM | VARCHAR | YES | None | None | None
+CommonLengthF | FLOAT | YES | None | None | None
+LTypeComF | VARCHAR | YES | None | None | None
+CommonLengthRef | INTEGER | YES | None | None | None
+Weight | FLOAT | YES | None | None | None
+WeightFemale | FLOAT | YES | None | None | None
+MaxWeightRef | INTEGER | YES | None | None | None
+Pic | VARCHAR | YES | None | None | None
+PictureFemale | VARCHAR | YES | None | None | None
+LarvaPic | VARCHAR | YES | None | None | None
+EggPic | VARCHAR | YES | None | None | None
+ImportanceRef | INTEGER | YES | None | None | None
+Importance | VARCHAR | YES | None | None | None
+PriceCateg | VARCHAR | YES | None | None | None
+PriceReliability | VARCHAR | YES | None | None | None
+Remarks7 | VARCHAR | YES | None | None | None
+LandingStatistics | VARCHAR | YES | None | None | None
+Landings | VARCHAR | YES | None | None | None
+MainCatchingMethod | VARCHAR | YES | None | None | None
+II | VARCHAR | YES | None | None | None
+MSeines | TINYINT | YES | None | None | None
+MGillnets | TINYINT | YES | None | None | None
+MCastnets | TINYINT | YES | None | None | None
+MTraps | TINYINT | YES | None | None | None
+MSpears | TINYINT | YES | None | None | None
+MTrawls | TINYINT | YES | None | None | None
+MDredges | TINYINT | YES | None | None | None
+MLiftnets | TINYINT | YES | None | None | None
+MHooksLines | TINYINT | YES | None | None | None
+MOther | TINYINT | YES | None | None | None
+UsedforAquaculture | VARCHAR | YES | None | None | None
+LifeCycle | VARCHAR | YES | None | None | None
+AquacultureRef | INTEGER | YES | None | None | None
+UsedasBait | VARCHAR | YES | None | None | None
+BaitRef | INTEGER | YES | None | None | None
+Aquarium | VARCHAR | YES | None | None | None
+AquariumFishII | VARCHAR | YES | None | None | None
+AquariumRef | INTEGER | YES | None | None | None
+GameFish | TINYINT | YES | None | None | None
+GameRef | INTEGER | YES | None | None | None
+Dangerous | VARCHAR | YES | None | None | None
+DangerousRef | INTEGER | YES | None | None | None
+Electrogenic | VARCHAR | YES | None | None | None
+ElectroRef | INTEGER | YES | None | None | None
+Complete | VARCHAR | YES | None | None | None
+GoogleImage | SMALLINT | YES | None | None | None
+Comments | VARCHAR | YES | None | None | None
+Profile | VARCHAR | YES | None | None | None
+PD50 | FLOAT | YES | None | None | None
+Emblematic | TINYINT | YES | None | None | None
+Entered | SMALLINT | YES | None | None | None
+DateEntered | TIMESTAMP | YES | None | None | None
+Modified | SMALLINT | YES | None | None | None
+DateModified | TIMESTAMP | YES | None | None | None
+Expert | SMALLINT | YES | None | None | None
+DateChecked | TIMESTAMP | YES | None | None | None
+TS | TIMESTAMP WITH TIME ZONE | YES | None | None | None
+
+SQL: DESCRIBE SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/country.parquet'
+column_name | column_type | null | key | default | extra
+autoctr | INTEGER | YES | None | None | None
+Stockcode | INTEGER | YES | None | None | None
+C_Code | VARCHAR | YES | None | None | None
+SpecCode | INTEGER | YES | None | None | None
+CountryRefNo | INTEGER | YES | None | None | None
+AlsoRef | INTEGER | YES | None | None | None
+Status | VARCHAR | YES | None | None | None
+CurrentPresence | VARCHAR | YES | None | None | None
+Freshwater | TINYINT | YES | None | None | None
+Brackish | TINYINT | YES | None | None | None
+Saltwater | TINYINT | YES | None | None | None
+Land | TINYINT | YES | None | None | None
+Comments | VARCHAR | YES | None | None | None
+Abundance | VARCHAR | YES | None | None | None
+RefAbundance | INTEGER | YES | None | None | None
+Importance | VARCHAR | YES | None | None | None
+RefImportance | INTEGER | YES | None | None | None
+ExVesselPrice | DOUBLE | YES | None | None | None
+Aquaculture | VARCHAR | YES | None | None | None
+RefAquaculture | INTEGER | YES | None | None | None
+LiveExportOrg | INTEGER | YES | None | None | None
+LiveExport | VARCHAR | YES | None | None | None
+RefLiveExport | INTEGER | YES | None | None | None
+Game | TINYINT | YES | None | None | None
+Bait | TINYINT | YES | None | None | None
+Regulations | VARCHAR | YES | None | None | None
+RefRegulations | INTEGER | YES | None | None | None
+Threatened | TINYINT | YES | None | None | None
+CountrySubComp | TINYINT | YES | None | None | None
+Entered | SMALLINT | YES | None | None | None
+DateEntered | TIMESTAMP | YES | None | None | None
+Modified | SMALLINT | YES | None | None | None
+DateModified | TIMESTAMP | YES | None | None | None
+Expert | SMALLINT | YES | None | None | None
+DateChecked | TIMESTAMP | YES | None | None | None
+TS | TIMESTAMP WITH TIME ZONE | YES | None | None | None
+
+SQL: DESCRIBE SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/countrysub.parquet'
+column_name | column_type | null | key | default | extra
+SpecCode | INTEGER | YES | None | None | None
+Stockcode | INTEGER | YES | None | None | None
+C_Code | VARCHAR | YES | None | None | None
+CSub_Code | VARCHAR | YES | None | None | None
+CSubRefNo | INTEGER | YES | None | None | None
+Status | VARCHAR | YES | None | None | None
+CurrentPresence | VARCHAR | YES | None | None | None
+Abundance | VARCHAR | YES | None | None | None
+RefAbundance | INTEGER | YES | None | None | None
+Comments | VARCHAR | YES | None | None | None
+Entered | SMALLINT | YES | None | None | None
+DateEntered | VARCHAR | YES | None | None | None
+Modified | SMALLINT | YES | None | None | None
+DateModified | VARCHAR | YES | None | None | None
+Expert | SMALLINT | YES | None | None | None
+DateChecked | VARCHAR | YES | None | None | None
+autoctr | INTEGER | YES | None | None | None
+TS | TIMESTAMP WITH TIME ZONE | YES | None | None | None
+
+SQL: DESCRIBE SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/comnames.parquet'
+column_name | column_type | null | key | default | extra
+autoctr | INTEGER | YES | None | None | None
+ComName | VARCHAR | YES | None | None | None
+Transliteration | VARCHAR | YES | None | None | None
+StockCode | INTEGER | YES | None | None | None
+SpecCode | INTEGER | YES | None | None | None
+C_Code | VARCHAR | YES | None | None | None
+Language | VARCHAR | YES | None | None | None
+Script | VARCHAR | YES | None | None | None
+UnicodeText | VARCHAR | YES | None | None | None
+NameType | VARCHAR | YES | None | None | None
+Plural | TINYINT | YES | None | None | None
+PreferredName | TINYINT | YES | None | None | None
+TradeName | INTEGER | YES | None | None | None
+TradeNameRef | INTEGER | YES | None | None | None
+ComNamesRefNo | INTEGER | YES | None | None | None
+Misspelling | TINYINT | YES | None | None | None
+Size | VARCHAR | YES | None | None | None
+Sex | VARCHAR | YES | None | None | None
+Language2 | VARCHAR | YES | None | None | None
+Locality2 | VARCHAR | YES | None | None | None
+Rank | SMALLINT | YES | None | None | None
+Remarks | VARCHAR | YES | None | None | None
+SecondWord | VARCHAR | YES | None | None | None
+ThirdWord | VARCHAR | YES | None | None | None
+FourthWord | VARCHAR | YES | None | None | None
+Entered | SMALLINT | YES | None | None | None
+DateEntered | TIMESTAMP | YES | None | None | None
+Modified | SMALLINT | YES | None | None | None
+DateModified | TIMESTAMP | YES | None | None | None
+Expert | SMALLINT | YES | None | None | None
+DateChecked | TIMESTAMP | YES | None | None | None
+Core | VARCHAR | YES | None | None | None
+modifier1 | VARCHAR | YES | None | None | None
+modifier2 | VARCHAR | YES | None | None | None
+CLOFFSCA | INTEGER | YES | None | None | None
+
+SQL: DESCRIBE SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/families.parquet'
+column_name | column_type | null | key | default | extra
+FamCode | INTEGER | YES | None | None | None
+SortID | INTEGER | YES | None | None | None
+Family | VARCHAR | YES | None | None | None
+AuthorYear | VARCHAR | YES | None | None | None
+Qualification | VARCHAR | YES | None | None | None
+CommonName | VARCHAR | YES | None | None | None
+FamiliesRefNo | INTEGER | YES | None | None | None
+Synonym | TINYINT | YES | None | None | None
+Order | VARCHAR | YES | None | None | None
+Ordnum | SMALLINT | YES | None | None | None
+Class | VARCHAR | YES | None | None | None
+ClassNum | SMALLINT | YES | None | None | None
+GenTypeCode | INTEGER | YES | None | None | None
+Genera | SMALLINT | YES | None | None | None
+Species | SMALLINT | YES | None | None | None
+BodyShapeI | VARCHAR | YES | None | None | None
+SpeciesCount | SMALLINT | YES | None | None | None
+Marine | BOOLEAN | YES | None | None | None
+Brackish | BOOLEAN | YES | None | None | None
+Freshwater | BOOLEAN | YES | None | None | None
+WaterSalinity | VARCHAR | YES | None | None | None
+Aquarium | VARCHAR | YES | None | None | None
+ReprGuild | VARCHAR | YES | None | None | None
+SwimMode | VARCHAR | YES | None | None | None
+SexualDimorphism | TINYINT | YES | None | None | None
+Activity | VARCHAR | YES | None | None | None
+PeriodRange | VARCHAR | YES | None | None | None
+Period | VARCHAR | YES | None | None | None
+EpochRange | VARCHAR | YES | None | None | None
+Epoch | VARCHAR | YES | None | None | None
+FossilRef | INTEGER | YES | None | None | None
+FamPic | VARCHAR | YES | None | None | None
+LarvPic | VARCHAR | YES | None | None | None
+ValidGenera | SMALLINT | YES | None | None | None
+Complete | BOOLEAN | YES | None | None | None
+Source | VARCHAR | YES | None | None | None
+AspinesMin | SMALLINT | YES | None | None | None
+AspinesMax | SMALLINT | YES | None | None | None
+AraysMin | SMALLINT | YES | None | None | None
+AraysMax | SMALLINT | YES | None | None | None
+DspinesMin | SMALLINT | YES | None | None | None
+DspinesMax | SMALLINT | YES | None | None | None
+DraysMin | SMALLINT | YES | None | None | None
+DraysMax | SMALLINT | YES | None | None | None
+Northernmost | SMALLINT | YES | None | None | None
+NorthSouthN | VARCHAR | YES | None | None | None
+Southernmost | SMALLINT | YES | None | None | None
+NorthSouthS | VARCHAR | YES | None | None | None
+Westernmost | SMALLINT | YES | None | None | None
+WestEastW | VARCHAR | YES | None | None | None
+Easternmost | SMALLINT | YES | None | None | None
+WestEastE | VARCHAR | YES | None | None | None
+PhiPrime | FLOAT | YES | None | None | None
+Division | VARCHAR | YES | None | None | None
+Experts | VARCHAR | YES | None | None | None
+DeepFinClassification | VARCHAR | YES | None | None | None
+CAS_LIN | SMALLINT | YES | None | None | None
+ZooBank_ID | VARCHAR | YES | None | None | None
+AphiaPK | INTEGER | YES | None | None | None
+Entered | SMALLINT | YES | None | None | None
+DateEntered | TIMESTAMP | YES | None | None | None
+Modified | SMALLINT | YES | None | None | None
+DateModified | TIMESTAMP | YES | None | None | None
+Expert | SMALLINT | YES | None | None | None
+DateChecked | TIMESTAMP | YES | None | None | None
+Remark | VARCHAR | YES | None | None | None
+Etymology | VARCHAR | YES | None | None | None
+FamilyExpert | SMALLINT | YES | None | None | None
+FBContact | SMALLINT | YES | None | None | None
+CLOFExpert | VARCHAR | YES | None | None | None
+CommonName_Greek | VARCHAR | YES | None | None | None
+CommonName_Greek_u | VARCHAR | YES | None | None | None
+CommonName_Russian | VARCHAR | YES | None | None | None
+CommonName_Russian_original | VARCHAR | YES | None | None | None
+CommonName_German | VARCHAR | YES | None | None | None
+CommonName_French | VARCHAR | YES | None | None | None
+CommonName_Italian | VARCHAR | YES | None | None | None
+CommonName_Dutch | VARCHAR | YES | None | None | None
+CommonName_Chinese | VARCHAR | YES | None | None | None
+CommonName_Chinese_u | VARCHAR | YES | None | None | None
+CommonName_Spanish | VARCHAR | YES | None | None | None
+CommonName_Portuguese | VARCHAR | YES | None | None | None
+CommonName_Swedish | VARCHAR | YES | None | None | None
+
+SQL: DESCRIBE SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/ecology.parquet'
+column_name | column_type | null | key | default | extra
+autoctr | INTEGER | YES | None | None | None
+SpecCode | INTEGER | YES | None | None | None
+StockCode | INTEGER | YES | None | None | None
+EcologyRefNo | INTEGER | YES | None | None | None
+HabitatsRef | INTEGER | YES | None | None | None
+Neritic | TINYINT | YES | None | None | None
+SupraLittoralZone | TINYINT | YES | None | None | None
+Saltmarshes | TINYINT | YES | None | None | None
+LittoralZone | TINYINT | YES | None | None | None
+TidePools | TINYINT | YES | None | None | None
+Intertidal | TINYINT | YES | None | None | None
+SubLittoral | TINYINT | YES | None | None | None
+Caves | TINYINT | YES | None | None | None
+Oceanic | TINYINT | YES | None | None | None
+Epipelagic | TINYINT | YES | None | None | None
+Mesopelagic | TINYINT | YES | None | None | None
+Bathypelagic | TINYINT | YES | None | None | None
+Abyssopelagic | TINYINT | YES | None | None | None
+Hadopelagic | TINYINT | YES | None | None | None
+Estuaries | TINYINT | YES | None | None | None
+Mangroves | TINYINT | YES | None | None | None
+MarshesSwamps | TINYINT | YES | None | None | None
+CaveAnchialine | TINYINT | YES | None | None | None
+Stream | TINYINT | YES | None | None | None
+Lakes | TINYINT | YES | None | None | None
+Cave | TINYINT | YES | None | None | None
+Cave2 | TINYINT | YES | None | None | None
+Herbivory2 | VARCHAR | YES | None | None | None
+HerbivoryRef | INTEGER | YES | None | None | None
+FeedingType | VARCHAR | YES | None | None | None
+FeedingTypeRef | INTEGER | YES | None | None | None
+DietTroph | DOUBLE | YES | None | None | None
+DietSeTroph | DOUBLE | YES | None | None | None
+DietTLu | DOUBLE | YES | None | None | None
+DietseTLu | DOUBLE | YES | None | None | None
+DietRemark | VARCHAR | YES | None | None | None
+DietRef | INTEGER | YES | None | None | None
+FoodTroph | DOUBLE | YES | None | None | None
+FoodSeTroph | DOUBLE | YES | None | None | None
+FoodRemark | VARCHAR | YES | None | None | None
+FoodRef | INTEGER | YES | None | None | None
+AddRems | VARCHAR | YES | None | None | None
+AssociationRef | INTEGER | YES | None | None | None
+Parasitism | TINYINT | YES | None | None | None
+Solitary | TINYINT | YES | None | None | None
+Symbiosis | TINYINT | YES | None | None | None
+Symphorism | TINYINT | YES | None | None | None
+Commensalism | TINYINT | YES | None | None | None
+Mutualism | TINYINT | YES | None | None | None
+Epiphytic | TINYINT | YES | None | None | None
+Schooling | TINYINT | YES | None | None | None
+SchoolingFrequency | VARCHAR | YES | None | None | None
+SchoolingLifestage | VARCHAR | YES | None | None | None
+Shoaling | TINYINT | YES | None | None | None
+ShoalingFrequency | VARCHAR | YES | None | None | None
+ShoalingLifestage | VARCHAR | YES | None | None | None
+SchoolShoalRef | INTEGER | YES | None | None | None
+AssociationsWith | VARCHAR | YES | None | None | None
+AssociationsRemarks | VARCHAR | YES | None | None | None
+OutsideHost | TINYINT | YES | None | None | None
+OHRemarks | VARCHAR | YES | None | None | None
+InsideHost | TINYINT | YES | None | None | None
+IHRemarks | VARCHAR | YES | None | None | None
+SubstrateRef | INTEGER | YES | None | None | None
+Benthic | TINYINT | YES | None | None | None
+Sessile | TINYINT | YES | None | None | None
+Mobile | TINYINT | YES | None | None | None
+Demersal | TINYINT | YES | None | None | None
+Endofauna | TINYINT | YES | None | None | None
+Pelagic | TINYINT | YES | None | None | None
+Megabenthos | TINYINT | YES | None | None | None
+Macrobenthos | TINYINT | YES | None | None | None
+Meiobenthos | TINYINT | YES | None | None | None
+SoftBottom | TINYINT | YES | None | None | None
+Sand | TINYINT | YES | None | None | None
+Coarse | TINYINT | YES | None | None | None
+Fine | TINYINT | YES | None | None | None
+Level | TINYINT | YES | None | None | None
+Sloping | TINYINT | YES | None | None | None
+Silt | TINYINT | YES | None | None | None
+Mud | TINYINT | YES | None | None | None
+Ooze | TINYINT | YES | None | None | None
+Detritus | TINYINT | YES | None | None | None
+Organic | TINYINT | YES | None | None | None
+HardBottom | TINYINT | YES | None | None | None
+Rocky | TINYINT | YES | None | None | None
+Rubble | TINYINT | YES | None | None | None
+Gravel | TINYINT | YES | None | None | None
+SpecialHabitatRef | INTEGER | YES | None | None | None
+Macrophyte | TINYINT | YES | None | None | None
+BedsBivalve | TINYINT | YES | None | None | None
+BedsRock | TINYINT | YES | None | None | None
+SeaGrassBeds | TINYINT | YES | None | None | None
+BedsOthers | TINYINT | YES | None | None | None
+CoralReefs | TINYINT | YES | None | None | None
+ReefExclusive | TINYINT | YES | None | None | None
+DropOffs | TINYINT | YES | None | None | None
+ReefFlats | TINYINT | YES | None | None | None
+Lagoons | TINYINT | YES | None | None | None
+Burrows | TINYINT | YES | None | None | None
+Tunnels | TINYINT | YES | None | None | None
+Guyots | TINYINT | YES | None | None | None
+Crevices | TINYINT | YES | None | None | None
+Seamounts | TINYINT | YES | None | None | None
+ColdSeeps | TINYINT | YES | None | None | None
+HydrothermalVents | TINYINT | YES | None | None | None
+DeepWaterCorals | TINYINT | YES | None | None | None
+Vegetation | TINYINT | YES | None | None | None
+Leaves | TINYINT | YES | None | None | None
+Stems | TINYINT | YES | None | None | None
+Roots | TINYINT | YES | None | None | None
+Driftwood | TINYINT | YES | None | None | None
+OInverterbrates | TINYINT | YES | None | None | None
+OIRemarks | VARCHAR | YES | None | None | None
+Verterbrates | TINYINT | YES | None | None | None
+VRemarks | VARCHAR | YES | None | None | None
+Pilings | TINYINT | YES | None | None | None
+RicePaddies | TINYINT | YES | None | None | None
+BoatHulls | TINYINT | YES | None | None | None
+Corals | TINYINT | YES | None | None | None
+SoftCorals | TINYINT | YES | None | None | None
+OnPolyp | TINYINT | YES | None | None | None
+BetweenPolyps | TINYINT | YES | None | None | None
+HardCorals | TINYINT | YES | None | None | None
+OnExoskeleton | TINYINT | YES | None | None | None
+InterstitialSpaces | TINYINT | YES | None | None | None
+Circadian1 | VARCHAR | YES | None | None | None
+Circadian2 | VARCHAR | YES | None | None | None
+Circadian3 | VARCHAR | YES | None | None | None
+BioAspect1 | VARCHAR | YES | None | None | None
+BioAspect2 | VARCHAR | YES | None | None | None
+BioAspect3 | VARCHAR | YES | None | None | None
+RemarksCircadian | VARCHAR | YES | None | None | None
+CircadianRef | INTEGER | YES | None | None | None
+CircadianAlsoRef | INTEGER | YES | None | None | None
+Entered | INTEGER | YES | None | None | None
+Dateentered | TIMESTAMP | YES | None | None | None
+Modified | INTEGER | YES | None | None | None
+Datemodified | TIMESTAMP | YES | None | None | None
+Expert | INTEGER | YES | None | None | None
+Datechecked | TIMESTAMP | YES | None | None | None
+TS | TIMESTAMP WITH TIME ZONE | YES | None | None | None
+
+SQL: DESCRIBE SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/zweb_foridentification.parquet'
+column_name | column_type | null | key | default | extra
+FamCode | INTEGER | YES | None | None | None
+Family | VARCHAR | YES | None | None | None
+CommonName | VARCHAR | YES | None | None | None
+Ordnum | SMALLINT | YES | None | None | None
+AspinesMin | SMALLINT | YES | None | None | None
+AspinesMax | SMALLINT | YES | None | None | None
+DspinesMin | SMALLINT | YES | None | None | None
+DspinesMax | SMALLINT | YES | None | None | None
+C_Code | VARCHAR | YES | None | None | None
+AreaCode | SMALLINT | YES | None | None | None
+FAM | VARCHAR | YES | None | None | None
+e_code | INTEGER | YES | None | None | None
+TS | TIMESTAMP WITH TIME ZONE | YES | None | None | None
+
+SQL: DESCRIBE SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/countref.parquet'
+column_name | column_type | null | key | default | extra
+PAESE | VARCHAR | YES | None | None | None
+Note | VARCHAR | YES | None | None | None
+C_Code | VARCHAR | YES | None | None | None
+ABB | VARCHAR | YES | None | None | None
+ISO | TINYINT | YES | None | None | None
+AdminCountry | VARCHAR | YES | None | None | None
+ISO1Num | SMALLINT | YES | None | None | None
+ISO2Alpha | VARCHAR | YES | None | None | None
+ISO3Alpha | VARCHAR | YES | None | None | None
+SAUP_Code | INTEGER | YES | None | None | None
+GSI_Name | VARCHAR | YES | None | None | None
+Used | TINYINT | YES | None | None | None
+Capital | VARCHAR | YES | None | None | None
+LatDeg | INTEGER | YES | None | None | None
+LatMin | DOUBLE | YES | None | None | None
+NorthSouth | VARCHAR | YES | None | None | None
+LongDeg | INTEGER | YES | None | None | None
+LongMin | DOUBLE | YES | None | None | None
+EastWest | VARCHAR | YES | None | None | None
+Remark | VARCHAR | YES | None | None | None
+PolarBoreal | TINYINT | YES | None | None | None
+Temperate | TINYINT | YES | None | None | None
+Subtropical | TINYINT | YES | None | None | None
+Tropical | TINYINT | YES | None | None | None
+Landlocked | TINYINT | YES | None | None | None
+GeographicArea | VARCHAR | YES | None | None | None
+Region | VARCHAR | YES | None | None | None
+Continent | VARCHAR | YES | None | None | None
+AreaCodeInland | INTEGER | YES | None | None | None
+FAOAreaInland | VARCHAR | YES | None | None | None
+AreaCodeMarineI | INTEGER | YES | None | None | None
+FAOAreaMarineI | VARCHAR | YES | None | None | None
+AreaCodeMarineII | INTEGER | YES | None | None | None
+FAOAreaMarineII | VARCHAR | YES | None | None | None
+AreaCodeMarineIII | INTEGER | YES | None | None | None
+FAOAreaMarineIII | VARCHAR | YES | None | None | None
+AreaCodeMarineIV | INTEGER | YES | None | None | None
+FAOAreaMarineIV | VARCHAR | YES | None | None | None
+AreaCodeMarineV | INTEGER | YES | None | None | None
+FAOAreaMarineV | VARCHAR | YES | None | None | None
+Population | INTEGER | YES | None | None | None
+PopulationYear | INTEGER | YES | None | None | None
+PopulationRate | DOUBLE | YES | None | None | None
+PopulationRef | INTEGER | YES | None | None | None
+CoastalPopulation | INTEGER | YES | None | None | None
+CoastPopRef | INTEGER | YES | None | None | None
+Area | INTEGER | YES | None | None | None
+Coastline | INTEGER | YES | None | None | None
+CoastlineRef | INTEGER | YES | None | None | None
+ShelfArea | DOUBLE | YES | None | None | None
+ShelfRef | INTEGER | YES | None | None | None
+EECarea | DOUBLE | YES | None | None | None
+EEZRef | INTEGER | YES | None | None | None
+Language | VARCHAR | YES | None | None | None
+Currency | VARCHAR | YES | None | None | None
+MarineCount | INTEGER | YES | None | None | None
+MarineFamCount | INTEGER | YES | None | None | None
+CompleteMarine | TINYINT | YES | None | None | None
+MarineLit | INTEGER | YES | None | None | None
+MarineFamLit | INTEGER | YES | None | None | None
+CheckMarineRef | INTEGER | YES | None | None | None
+MarineFlag | TINYINT | YES | None | None | None
+FreshwaterCount | INTEGER | YES | None | None | None
+FreshFamCount | INTEGER | YES | None | None | None
+CompleteFresh | TINYINT | YES | None | None | None
+FreshwaterLit | INTEGER | YES | None | None | None
+FreshFamLit | INTEGER | YES | None | None | None
+CheckFreshRef | INTEGER | YES | None | None | None
+FreshFlag | TINYINT | YES | None | None | None
+TotalCount | INTEGER | YES | None | None | None
+TotalFamCount | INTEGER | YES | None | None | None
+TotalComplete | TINYINT | YES | None | None | None
+TotalLit | INTEGER | YES | None | None | None
+TotalFamLit | INTEGER | YES | None | None | None
+TotalRef | INTEGER | YES | None | None | None
+LastUpdate | TIMESTAMP | YES | None | None | None
+MorphCountFresh | INTEGER | YES | None | None | None
+OccurCountFresh | INTEGER | YES | None | None | None
+PicCountFresh | INTEGER | YES | None | None | None
+GrowthCountFresh | INTEGER | YES | None | None | None
+FoodCountFresh | INTEGER | YES | None | None | None
+DietCountFresh | INTEGER | YES | None | None | None
+ReproductionCountFresh | INTEGER | YES | None | None | None
+SpawningCountFresh | INTEGER | YES | None | None | None
+MorphCountMarine | INTEGER | YES | None | None | None
+OccurCountMarine | INTEGER | YES | None | None | None
+PicCountMarine | INTEGER | YES | None | None | None
+GrowthCountMarine | INTEGER | YES | None | None | None
+FoodCountMarine | INTEGER | YES | None | None | None
+DietCountMarine | INTEGER | YES | None | None | None
+ReproductionCountMarine | INTEGER | YES | None | None | None
+SpawningCountMarine | INTEGER | YES | None | None | None
+LatDegFill | INTEGER | YES | None | None | None
+LatMinFill | DOUBLE | YES | None | None | None
+NorthSouthFill | VARCHAR | YES | None | None | None
+LongDegFill | INTEGER | YES | None | None | None
+LongMinFill | DOUBLE | YES | None | None | None
+EastWestFill | VARCHAR | YES | None | None | None
+MLatDegFill | INTEGER | YES | None | None | None
+MLatMinFill | DOUBLE | YES | None | None | None
+MNorthSouthFill | VARCHAR | YES | None | None | None
+MLongDegFill | INTEGER | YES | None | None | None
+MLongMinFill | DOUBLE | YES | None | None | None
+MEastWestFill | VARCHAR | YES | None | None | None
+MLatDegFill2 | INTEGER | YES | None | None | None
+MLatMinFill2 | DOUBLE | YES | None | None | None
+MNorthSouthFill2 | VARCHAR | YES | None | None | None
+MLongDegFill2 | INTEGER | YES | None | None | None
+MLongMinFill2 | DOUBLE | YES | None | None | None
+MEastWestFill2 | VARCHAR | YES | None | None | None
+MLatDegFill3 | INTEGER | YES | None | None | None
+MLatMinFill3 | DOUBLE | YES | None | None | None
+MNorthSouthFill3 | VARCHAR | YES | None | None | None
+MLongDegFill3 | INTEGER | YES | None | None | None
+MLongMinFill3 | DOUBLE | YES | None | None | None
+MEastWestFill3 | VARCHAR | YES | None | None | None
+MLatDegFill4 | INTEGER | YES | None | None | None
+MLatMinFill4 | DOUBLE | YES | None | None | None
+MNorthSouthFill4 | VARCHAR | YES | None | None | None
+MLongDegFill4 | INTEGER | YES | None | None | None
+MLongMinFill4 | DOUBLE | YES | None | None | None
+MEastWestFill4 | VARCHAR | YES | None | None | None
+MLatDegFill5 | INTEGER | YES | None | None | None
+MLatMinFill5 | DOUBLE | YES | None | None | None
+MNorthSouthFill5 | VARCHAR | YES | None | None | None
+MLongDegFill5 | INTEGER | YES | None | None | None
+MLongMinFill5 | DOUBLE | YES | None | None | None
+MEastWestFill5 | VARCHAR | YES | None | None | None
+NorthernLatitude | INTEGER | YES | None | None | None
+NorthernLatitudeNS | VARCHAR | YES | None | None | None
+SouthernLatitude | INTEGER | YES | None | None | None
+SouthernLatitudeNS | VARCHAR | YES | None | None | None
+WesternLongitude | INTEGER | YES | None | None | None
+WesternLongitudeEW | VARCHAR | YES | None | None | None
+EasternLongitude | INTEGER | YES | None | None | None
+EasternLongitudeEW | VARCHAR | YES | None | None | None
+CenterLat | DOUBLE | YES | None | None | None
+CenterLong | DOUBLE | YES | None | None | None
+OtherLanguage | VARCHAR | YES | None | None | None
+Geography | VARCHAR | YES | None | None | None
+GeographyRef | INTEGER | YES | None | None | None
+Hydrography | VARCHAR | YES | None | None | None
+HydrographyRef | INTEGER | YES | None | None | None
+CommentFresh | VARCHAR | YES | None | None | None
+RefFresh1 | INTEGER | YES | None | None | None
+RefFresh2 | INTEGER | YES | None | None | None
+RefFresh3 | INTEGER | YES | None | None | None
+FreshPrimary | INTEGER | YES | None | None | None
+FreshSecondary | INTEGER | YES | None | None | None
+FreshInto | INTEGER | YES | None | None | None
+InFisheriesReported | INTEGER | YES | None | None | None
+InFisheriesPotential | INTEGER | YES | None | None | None
+InAquaReported | INTEGER | YES | None | None | None
+InAquaPotential | INTEGER | YES | None | None | None
+ExportReported | INTEGER | YES | None | None | None
+ExportPotential | INTEGER | YES | None | None | None
+SportReported | INTEGER | YES | None | None | None
+SportPotential | INTEGER | YES | None | None | None
+EndemicReported | INTEGER | YES | None | None | None
+EndemicPotential | INTEGER | YES | None | None | None
+Threatened | INTEGER | YES | None | None | None
+ProtectedReported | DOUBLE | YES | None | None | None
+ProtectedPotential | INTEGER | YES | None | None | None
+ACP | TINYINT | YES | None | None | None
+Developed | TINYINT | YES | None | None | None
+Marine | INTEGER | YES | None | None | None
+Brackish | INTEGER | YES | None | None | None
+MarineInto | INTEGER | YES | None | None | None
+MarineInFisheriesReported | INTEGER | YES | None | None | None
+MarineInFisheriesPotential | INTEGER | YES | None | None | None
+MarineInAquaReported | INTEGER | YES | None | None | None
+MarineInAquaPotential | INTEGER | YES | None | None | None
+MarineExportReported | INTEGER | YES | None | None | None
+MarineExportPotential | INTEGER | YES | None | None | None
+MarineSportReported | INTEGER | YES | None | None | None
+MarineSportPotential | INTEGER | YES | None | None | None
+MarineEndemicReported | INTEGER | YES | None | None | None
+MarineEndemicPotential | INTEGER | YES | None | None | None
+MarineThreatened | INTEGER | YES | None | None | None
+MarineProtectedReported | DOUBLE | YES | None | None | None
+MarineProtectedPotential | INTEGER | YES | None | None | None
+NatFishDB | VARCHAR | YES | None | None | None
+NatFishDB2 | VARCHAR | YES | None | None | None
+Factbook | VARCHAR | YES | None | None | None
+NatFishAut | VARCHAR | YES | None | None | None
+TradeNames | VARCHAR | YES | None | None | None
+Entered | INTEGER | YES | None | None | None
+DateEntered | TIMESTAMP | YES | None | None | None
+Modified | INTEGER | YES | None | None | None
+DateModified | TIMESTAMP | YES | None | None | None
+Expert | INTEGER | YES | None | None | None
+DateChecked | TIMESTAMP | YES | None | None | None
+Greek_original | VARCHAR | YES | None | None | None
+Greek | VARCHAR | YES | None | None | None
+RUSSIAN_original | VARCHAR | YES | None | None | None
+RUSSIAN | VARCHAR | YES | None | None | None
+FRENCH | VARCHAR | YES | None | None | None
+SPANISH | VARCHAR | YES | None | None | None
+GERMAN | VARCHAR | YES | None | None | None
+DUTCH | VARCHAR | YES | None | None | None
+
+SQL: DESCRIBE SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/faoareas.parquet'
+column_name | column_type | null | key | default | extra
+autoctr | INTEGER | YES | None | None | None
+AreaCode | SMALLINT | YES | None | None | None
+SpecCode | INTEGER | YES | None | None | None
+StockCode | INTEGER | YES | None | None | None
+Status | VARCHAR | YES | None | None | None
+Entered | SMALLINT | YES | None | None | None
+DateEntered | TIMESTAMP | YES | None | None | None
+Modified | SMALLINT | YES | None | None | None
+DateModified | TIMESTAMP | YES | None | None | None
+Expert | SMALLINT | YES | None | None | None
+DateChecked | TIMESTAMP | YES | None | None | None
+TS | TIMESTAMP WITH TIME ZONE | YES | None | None | None
+
+SQL: SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/countrysub.parquet' WHERE C_Code IN ('840','124') LIMIT 10
+SpecCode | Stockcode | C_Code | CSub_Code | CSubRefNo | Status | CurrentPresence | Abundance | RefAbundance | Comments | Entered | DateEntered | Modified | DateModified | Expert | DateChecked | autoctr | TS
+3 | 3 | 840 | US-AZ | 79012 | introduced | present | None | None | None | 1472 | 24/10/2008 | None | 24/10/2008 | None | None | 189650 | None
+3 | 3 | 840 | US-CA | 9987 | introduced | present | None | None | Reported to be the dominant species in the Salton Sea (Ref. 9987).  Also Ref. 79 | 1472 | 10/12/2007 | 1472 | 23/09/2014 | None | None | 180832 | None
+3 | 3 | 840 | US-CO | 79012 | introduced | present | None | None | None | 1472 | 24/10/2008 | None | 24/10/2008 | None | None | 189653 | None
+3 | 3 | 840 | US-FL | 3 | introduced | present | None | None | Also Ref. 79012. | 1472 | 10/12/2007 | 1472 | 24/10/2008 | None | None | 180834 | None
+3 | 3 | 840 | US-GA | 79012 | introduced | present | None | None | None | 1472 | 24/10/2008 | None | 24/10/2008 | None | None | 189652 | None
+3 | 3 | 840 | US-ID | 3 | introduced | present | None | None | None | 1472 | 10/12/2007 | None | 10/12/2007 | None | None | 180835 | None
+3 | 3 | 840 | US-MT | 79012 | introduced | present | None | None | None | 1472 | 24/10/2008 | None | 24/10/2008 | None | None | 189654 | None
+3 | 3 | 840 | US-NC | 79012 | introduced | present | None | None | None | 1472 | 24/10/2008 | None | 24/10/2008 | None | None | 189651 | None
+
+SQL: SELECT C_Code, CSub_Code, count(*) n FROM '/tmp/fb/data/fb/v25.04/parquet/countrysub.parquet' WHERE C_Code IN ('840','124') GROUP BY ALL ORDER BY n DESC
+C_Code | CSub_Code | n
+840 | US-FL | 873
+840 | US-CA | 638
+124 | CA-BC | 488
+840 | US-NC | 401
+840 | US-TN | 304
+840 | US-TX | 279
+840 | US-ME | 261
+840 | US-AL | 253
+840 | US-OR | 248
+124 | CA-NS | 244
+840 | US-GA | 224
+840 | US-MO | 224
+124 | CA-NL | 222
+840 | US-VA | 207
+840 | US-WA | 207
+124 | CA-QC | 203
+840 | US-SC | 196
+124 | CA-NU | 185
+124 | CA-ON | 179
+840 | US-WI | 175
+840 | US-NY | 174
+840 | US-MA | 169
+840 | US-NJ | 163
+840 | US-LA | 148
+840 | US-KY | 148
+840 | US-MS | 143
+124 | CA-NB | 143
+840 | US-AR | 124
+840 | US-OK | 111
+840 | US-IL | 108
+124 | CA-MB | 104
+124 | CA-NT | 98
+840 | US-MN | 95
+840 | US-OH | 80
+124 | CA-YT | 80
+124 | CA-AB | 79
+840 | US-PA | 79
+840 | US-IN | 76
+840 | US-WV | 76
+840 | US-NM | 74
+840 | US-MI | 71
+840 | US-MD | 70
+840 | US-KS | 66
+124 | CA-SK | 63
+840 | US-IA | 63
+840 | US-MT | 53
+840 | US-NV | 48
+840 | US-WY | 48
+840 | US-AZ | 47
+840 | US-CT | 46
+124 | CA-PE | 45
+840 | US-CO | 45
+840 | US-SD | 45
+840 | US-ID | 45
+840 | US-DE | 44
+840 | US-NH | 44
+840 | US-VT | 40
+840 | US-RI | 40
+840 | US-ND | 39
+840 | US-NE | 39
+840 | US-UT | 37
+840 | US-DC | 12
+840 | US-AK | 6
+840 | US-HI | 1
+
+SQL: SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/country.parquet' WHERE C_Code='840' LIMIT 5
+autoctr | Stockcode | C_Code | SpecCode | CountryRefNo | AlsoRef | Status | CurrentPresence | Freshwater | Brackish | Saltwater | Land | Comments | Abundance | RefAbundance | Importance | RefImportance | ExVesselPrice | Aquaculture | RefAquaculture | LiveExportOrg | LiveExport | RefLiveExport | Game | Bait | Regulations | RefRegulations | Threatened | CountrySubComp | Entered | DateEntered | Modified | DateModified | Expert | DateChecked | TS
+460 | 1 | 840 | 2 | 166 | None | introduced | present | 1 | 1 | 0 | 0 | None | None | None | None | None | None | None | None | 0 | None | None | 0 | 0 | None | None | 0 | 0 | 18 | 1993-01-25 00:00:00 | 1 | 2000-11-21 00:00:00 | None | None | None
+74 | 3 | 840 | 3 | 1739 | None | introduced | present | 1 | 1 | 0 | 0 | Known from southern parts of the USA (Ref. 52307), including California, Texas ( | None | None |   | None | None | None | None | 0 |   | None | 1 | 0 | None | None | 0 | 0 | 19 | 1992-08-27 00:00:00 | 2447 | 2014-09-23 00:00:00 | None | None | None
+93 | 5 | 840 | 5 | 25 | 9761 | native | present | 0 | 1 | 1 | 0 | Type locality, Charleston.  A preferred fish important to commercial and recreat | None | None | commercial | 35505 | 512.31 | None | None | 0 | None | None | 1 | 0 | None | None | 0 | 1 | 2 | 1990-11-22 00:00:00 | 14 | 2013-06-04 00:00:00 | None | None | None
+581 | 9 | 840 | 7 | 26 | None | native | present | 0 | 0 | 1 | 0 | Also Ref. 7251. | None | None | None | None | None | None | None | 0 | None | None | 0 | 0 | None | None | 0 | 0 | 2 | 1990-12-11 00:00:00 | 10 | 1994-12-15 00:00:00 | None | None | None
+195 | 18 | 840 | 12 | 5222 | 13442 | native | present | 0 | 0 | 1 | 0 | Recorded from depth of  240 feet off Texas (Ref. 13442).  Found in the Flower Ga | None | None | None | None | None | None | None | 0 | None | None | 0 | 0 | None | None | 0 | 0 | 2 | 1990-12-11 00:00:00 | 2291 | 2013-08-27 00:00:00 | None | None | None
+
+SQL: SELECT GameFish, count(*) FROM '/tmp/fb/data/fb/v25.04/parquet/species.parquet' GROUP BY ALL
+GameFish | count_star()
+0 | 34718
+1 | 1414
+
+SQL: SELECT Game, count(*) FROM '/tmp/fb/data/fb/v25.04/parquet/country.parquet' WHERE C_Code IN ('840','124') GROUP BY ALL
+Game | count_star()
+0 | 4055
+1 | 266
+
+SQL: SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/zweb_foridentification.parquet' LIMIT 3
+FamCode | Family | CommonName | Ordnum | AspinesMin | AspinesMax | DspinesMin | DspinesMax | C_Code | AreaCode | FAM | e_code | TS
+1 | Petromyzontidae | Lampreys | 2 | 0 | 0 | 0 | 0 | 752 | 8 |    2. | None | None
+1 | Petromyzontidae | Lampreys | 2 | 0 | 0 | 0 | 0 | 752 | 18 |    2. | None | None
+1 | Petromyzontidae | Lampreys | 2 | 0 | 0 | 0 | 0 | 752 | 21 |    2. | None | None
+
+SQL: SELECT * FROM '/tmp/fb/data/fb/v25.04/parquet/countref.parquet' WHERE C_Code IN ('840','124') LIMIT 3
+PAESE | Note | C_Code | ABB | ISO | AdminCountry | ISO1Num | ISO2Alpha | ISO3Alpha | SAUP_Code | GSI_Name | Used | Capital | LatDeg | LatMin | NorthSouth | LongDeg | LongMin | EastWest | Remark | PolarBoreal | Temperate | Subtropical | Tropical | Landlocked | GeographicArea | Region | Continent | AreaCodeInland | FAOAreaInland | AreaCodeMarineI | FAOAreaMarineI | AreaCodeMarineII | FAOAreaMarineII | AreaCodeMarineIII | FAOAreaMarineIII | AreaCodeMarineIV | FAOAreaMarineIV | AreaCodeMarineV | FAOAreaMarineV | Population | PopulationYear | PopulationRate | PopulationRef | CoastalPopulation | CoastPopRef | Area | Coastline | CoastlineRef | ShelfArea | ShelfRef | EECarea | EEZRef | Language | Currency | MarineCount | MarineFamCount | CompleteMarine | MarineLit | MarineFamLit | CheckMarineRef | MarineFlag | FreshwaterCount | FreshFamCount | CompleteFresh | FreshwaterLit | FreshFamLit | CheckFreshRef | FreshFlag | TotalCount | TotalFamCount | TotalComplete | TotalLit | TotalFamLit | TotalRef | LastUpdate | MorphCountFresh | OccurCountFresh | PicCountFresh | GrowthCountFresh | FoodCountFresh | DietCountFresh | ReproductionCountFresh | SpawningCountFresh | MorphCountMarine | OccurCountMarine | PicCountMarine | GrowthCountMarine | FoodCountMarine | DietCountMarine | ReproductionCountMarine | SpawningCountMarine | LatDegFill | LatMinFill | NorthSouthFill | LongDegFill | LongMinFill | EastWestFill | MLatDegFill | MLatMinFill | MNorthSouthFill | MLongDegFill | MLongMinFill | MEastWestFill | MLatDegFill2 | MLatMinFill2 | MNorthSouthFill2 | MLongDegFill2 | MLongMinFill2 | MEastWestFill2 | MLatDegFill3 | MLatMinFill3 | MNorthSouthFill3 | MLongDegFill3 | MLongMinFill3 | MEastWestFill3 | MLatDegFill4 | MLatMinFill4 | MNorthSouthFill4 | MLongDegFill4 | MLongMinFill4 | MEastWestFill4 | MLatDegFill5 | MLatMinFill5 | MNorthSouthFill5 | MLongDegFill5 | MLongMinFill5 | MEastWestFill5 | NorthernLatitude | NorthernLatitudeNS | SouthernLatitude | SouthernLatitudeNS | WesternLongitude | WesternLongitudeEW | EasternLongitude | EasternLongitudeEW | CenterLat | CenterLong | OtherLanguage | Geography | GeographyRef | Hydrography | HydrographyRef | CommentFresh | RefFresh1 | RefFresh2 | RefFresh3 | FreshPrimary | FreshSecondary | FreshInto | InFisheriesReported | InFisheriesPotential | InAquaReported | InAquaPotential | ExportReported | ExportPotential | SportReported | SportPotential | EndemicReported | EndemicPotential | Threatened | ProtectedReported | ProtectedPotential | ACP | Developed | Marine | Brackish | MarineInto | MarineInFisheriesReported | MarineInFisheriesPotential | MarineInAquaReported | MarineInAquaPotential | MarineExportReported | MarineExportPotential | MarineSportReported | MarineSportPotential | MarineEndemicReported | MarineEndemicPotential | MarineThreatened | MarineProtectedReported | MarineProtectedPotential | NatFishDB | NatFishDB2 | Factbook | NatFishAut | TradeNames | Entered | DateEntered | Modified | DateModified | Expert | DateChecked | Greek_original | Greek | RUSSIAN_original | RUSSIAN | FRENCH | SPANISH | GERMAN | DUTCH | PORTUGUESE | ITALIAN | SWEDISH | TS
+USA | United States (contiguous states) | 840 | USA | -1 | 840 | 840 | US | USA | 848 | United States | -1 | Washington, D.C. | 38 | 53.0 | N | 77 | 1.0 | W | Independent since 1776 from United Kingdom | 0 | -1 | -1 | -1 | 0 | Central northern America. | Northern America | North America | 2 | America, North - Inland waters | 21 | Atlantic, Northwest | 67 | Pacific, Northeast | 18 | Arctic Sea | 31 | Atlantic, Western Central | 77 | Pacific, Eastern Central | 293028 | 2004 | 0.9200000166893005 | 53414 | 41 | 6288 | 9629047 | 19930 | 27871 | 1870.699951171875 | 6288 | 9711.400390625 | 6288 | English | US dollar (USD) | 2212 | 290 | -1 | None | None | 3814 | -1 | 956 | 59 | -1 | None | None | 3814 | -1 | 3143 | 328 | -1 | None | None | None | 2025-04-26 00:00:00 | 499 | 712 | 776 | 187 | 342 | 148 | 609 | 221 | 1824 | 2093 | 1959 | 599 | 1248 | 674 | 1549 | 728 | 38 | 10.0 | N | 95 | 0.0 | W | 40 | 30.0 | N | 69 | 10.0 | W | 45 | 5.0 | N | 125 | 18.0 | W | 71 | 10.0 | N | 164 | 5.0 | W | 28 | 43.0 | N | 77 | 0.0 | W | 34 | 20.0 | N | 120 | 40.0 | W | 71 | N | 24 | N | 125 | W | 76 | W | 38.2282435491 | -99.2638901903 | Creek, Cherokee, Chocktaw, Navajo, Ojibway, Papago, Polish, Sioux, Spanish, Ukra | USA is located in North America, bordering both the North Atlantic Ocean and the | 30539 | None | None | The following information is to be sought:
+- Status of knowledge of the freshwa | 3814 | None | None | 776 | 127 | 68 | 38 | 219 | 12 | 58 | 45 | 97 | 70 | 85 | 372 | 135 | 171 | 75.0 | 12 | 0 | -1 | 1986 | 218 | 12 | 118 | 908 | 5 | 35 | 13 | 236 | 58 | 386 | 4 | 28 | 120 | 19.0 | 12 | None | None | #https://www.cia.gov/library/publications/resources/the-world-factbook/geos/us.h | #http://www.nmfs.gov# | None | 1 | 1993-11-17 00:00:00 | 303 | 2024-01-20 00:00:00 | None | None | ?.?.?. | &#919;&#46;&#928;&#46;&#913;&#46; | ??? (??????????? ????? ???????) | &#1057;&#1064;&#1040;&#32;&#40;&#1057;&#1086;&#1077;&#1076;&#1080;&#1085;&#1077; | États-Unis d'Amérique | Estados Unidos | USA (angrenzende Staaten)  | Verenigde Staten van Amerika (aangrenzende staten) | Estados Unidos da América (Estados contíguos) | Stati Uniti (stati contigui) | USA | None
+Canada | Canada | 124 | CAN | -1 | 124 | 124 | CA | CAN | 924 | Canada | -1 | Ottawa | 45 | 25.0 | N | 75 | 43.0 | W | Commonwealth Nation. Independent in 1867 from United Kingdom. | -1 | -1 | 0 | 0 | 0 | Northern North America. | Northern America | North America | 2 | America, North - Inland waters | 21 | Atlantic, Northwest | 67 | Pacific, Northeast | 18 | Arctic Sea | None | None | None | None | 32508 | 2004 | 0.9200000166893005 | 53414 | 15 | 6288 | 9970610 | 243790 | 27871 | 2903.39990234375 | 6288 | 2939.39990234375 | 6288 | English | Canadian dollar (CAD) | 958 | 206 | -1 | None | None | 3814 | -1 | 225 | 37 | -1 | 190 | None | 13681 | -1 | 1150 | 226 | -1 | None | None | None | 2025-04-26 00:00:00 | 193 | 227 | 235 | 119 | 227 | 98 | 219 | 132 | 823 | 931 | 925 | 342 | 682 | 347 | 609 | 418 | 58 | 0.0 | N | 119 | 0.0 | W | 44 | 48.0 | N | 56 | 58.0 | W | 58 | 0.0 | N | 42 | 26.0 | W | 72 | 0.0 | N | 137 | 20.0 | W | None | None | None | None | None | None | None | None | None | None | None | None | 83 | N | 42 | N | 143 | W | 52 | W | 57.4856248841 | -105.252686793 | French, Cree-Montagnais, Dutch, Eskimo (Inupik), Iroquois, Ojibway, Ukranian, Yi | Canada is located in Northern North America, bordering the North Atlantic Ocean  | 30539 | None | None | The following information is to be sought:
+- Status of knowledge of the freshwa | 3814 | None | None | 141 | 63 | 23 | 70 | 79 | 7 | 36 | 23 | 20 | 64 | 41 | 1 | 2 | 16 | 10.0 | 14 | 0 | -1 | 844 | 92 | 1 | 84 | 310 | 7 | 21 | 10 | 36 | 111 | 137 | 0 | 2 | 51 | 1.0 | 13 | None | None | #https://www.cia.gov/library/publications/resources/the-world-factbook/geos/ca.h | #http://www.ncr.dfo.ca/home_e.htm# | None | 1 | 1993-11-17 00:00:00 | 97 | 2024-01-20 00:00:00 | None | None | ??????? | &#922;&#945;&#957;&#945;&#948;&#940;&#962; | ?????? | &#1050;&#1072;&#1085;&#1072;&#1076;&#1072; | Canada | Canadá | Kanada  | Canada | Canadá | Canada | Kanada | None
