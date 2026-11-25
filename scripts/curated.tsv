@@ -1,0 +1,125 @@
+# section|habitat(f/s/b)|common name|scientific names (;-separated, first is preferred)|field marks
+trout|f|Brook Trout|Salvelinus fontinalis|Wormy olive markings on the back, red spots with blue halos, and a white leading edge on the lower fins.
+trout|f|Brown Trout|Salmo trutta|Golden-brown body with black and red spots, often haloed in pale blue; tail has few or no spots.
+trout|b|Rainbow Trout|Oncorhynchus mykiss|Pink-red band along the side with small black spots over the body and tail. The sea-run form is the steelhead.
+trout|f|Cutthroat Trout|Oncorhynchus clarkii;Oncorhynchus clarkii lewisi|Red-orange slash under the lower jaw; spots heaviest toward the tail.
+trout|f|Lake Trout|Salvelinus namaycush|Pale cream spots on a gray-green body and a deeply forked tail.
+trout|f|Bull Trout|Salvelinus confluentus|Pale yellow to pink spots on an olive body, no black spots, and a broad flat head.
+trout|b|Dolly Varden|Salvelinus malma|Small pink-red spots on olive sides; slimmer head than a bull trout.
+trout|b|Arctic Char|Salvelinus alpinus|Char of the far north; pale to red spots, and spawners turn brilliant orange-red below.
+trout|f|Arctic Grayling|Thymallus arcticus|Huge sail-like dorsal fin edged and spotted with iridescent color.
+trout|b|Chinook Salmon|Oncorhynchus tshawytscha|Black gums and lower jaw; black spots on both lobes of the tail.
+trout|b|Coho Salmon|Oncorhynchus kisutch|White gums with a dark mouth; spots only on the upper lobe of the tail.
+trout|b|Sockeye Salmon|Oncorhynchus nerka|Spawners turn scarlet with an olive-green head; few distinct spots.
+trout|b|Pink Salmon|Oncorhynchus gorbuscha|Large oval black spots on the tail; spawning males grow a tall hump.
+trout|b|Chum Salmon|Oncorhynchus keta|Spawners show calico purple and green vertical bars and large canine teeth.
+trout|b|Atlantic Salmon|Salmo salar|Black X-shaped spots mostly above the lateral line; slender tail base and slightly forked tail.
+trout|f|Lake Whitefish|Coregonus clupeaformis|Small head, blunt snout overhanging the mouth, silvery body with a slight hump behind the head.
+trout|f|Mountain Whitefish|Prosopium williamsoni|Small mouth under a pointed snout, large scales and a round, silvery body.
+bass|f|Largemouth Bass|Micropterus nigricans;Micropterus salmoides|Upper jaw extends past the eye; dark blotchy stripe along the side; deep notch between the dorsal fins.
+bass|f|Florida Bass|Micropterus salmoides floridanus;Micropterus floridanus|Southeastern relative of the largemouth, nearly identical outwardly; known by range and genetics.
+bass|f|Smallmouth Bass|Micropterus dolomieu|Bronze to brown with vertical bars; jaw ends at or before the middle of the red eye.
+bass|f|Spotted Bass|Micropterus punctulatus|Rows of small dark spots below the lateral line and a jaw ending near the back of the eye.
+bass|f|Bluegill|Lepomis macrochirus|All-dark "ear" flap with no colored edge and a dark blotch at the rear of the soft dorsal fin.
+bass|f|Pumpkinseed|Lepomis gibbosus|Ear flap tipped with a bright red-orange spot; wavy blue lines across the cheek.
+bass|f|Redear Sunfish|Lepomis microlophus|Ear flap edged in red or orange; plain cheeks and no dorsal blotch. Also called shellcracker.
+bass|f|Green Sunfish|Lepomis cyanellus|Big mouth for a sunfish, blue-green wavy cheek lines, and yellow-edged fins.
+bass|f|Redbreast Sunfish|Lepomis auritus|Long, narrow, all-black ear flap and an orange-red breast.
+bass|f|Longear Sunfish|Lepomis megalotis|Long ear flap edged in white, with orange and turquoise marbling.
+bass|f|Warmouth|Lepomis gulosus|Dark streaks radiating back from the red eye, large mouth, mottled brown body.
+bass|f|Black Crappie|Pomoxis nigromaculatus|Irregular black speckling all over; usually 7–8 dorsal spines.
+bass|f|White Crappie|Pomoxis annularis|Faint vertical bars rather than speckles; usually 6 dorsal spines.
+bass|f|Rock Bass|Ambloplites rupestris|Ruby-red eye, rows of dark spots along the sides, and 6 anal-fin spines.
+perch|f|Walleye|Sander vitreus|Glassy, light-gathering eyes, a white tip on the lower lobe of the tail, and a dark blotch at the rear of the spiny dorsal fin.
+perch|f|Sauger|Sander canadensis|Rows of black spots on the spiny dorsal fin, dark saddles, and no white tail tip.
+perch|f|Yellow Perch|Perca flavescens|Golden-yellow body with 6–8 dark vertical bars and orange lower fins.
+pike|f|Northern Pike|Esox lucius|Rows of pale bean-shaped spots on a dark green body; cheek fully scaled.
+pike|f|Muskellunge|Esox masquinongy|Dark bars or spots on a light body; lower half of the cheek and gill cover lack scales.
+pike|f|Chain Pickerel|Esox niger|Dark chain-link pattern on the sides and a dark teardrop bar under the eye.
+pike|f|Redfin Pickerel|Esox americanus|Small pickerel with wavy dark bars, reddish lower fins and a dark teardrop under the eye.
+cat|f|Channel Catfish|Ictalurus punctatus|Deeply forked tail, scattered dark spots on young fish, and a rounded anal fin.
+cat|f|Blue Catfish|Ictalurus furcatus|Forked tail, straight-edged anal fin with 30 or more rays, slate-blue color and no spots.
+cat|f|Flathead Catfish|Pylodictis olivaris|Broad flat head, lower jaw jutting past the upper, and a squarish tail.
+cat|f|Brown Bullhead|Ameiurus nebulosus|Square tail, mottled brown sides and dark chin barbels.
+cat|f|Yellow Bullhead|Ameiurus natalis|White or yellowish chin barbels and a rounded tail.
+cat|f|Black Bullhead|Ameiurus melas|Dark chin barbels, a pale bar at the tail base, and a square tail.
+cat|b|White Catfish|Ameiurus catus|Moderately forked tail, white belly and white chin barbels.
+temp|b|Striped Bass|Morone saxatilis|7–8 unbroken dark horizontal stripes and two tooth patches on the back of the tongue.
+temp|f|White Bass|Morone chrysops|Faint, often broken stripes on a deep body; a single tooth patch on the tongue.
+temp|f|Yellow Bass|Morone mississippiensis|Brassy yellow with stripes broken and offset below the lateral line.
+temp|b|White Perch|Morone americana|Silvery olive with no stripes; spiny and soft dorsal fins connected by a membrane.
+rough|f|Longnose Gar|Lepisosteus osseus|Very long, narrow beak, more than twice the length of the rest of the head.
+rough|f|Spotted Gar|Lepisosteus oculatus|Shorter beak and bold dark spots on the head, body and fins.
+rough|b|Alligator Gar|Atractosteus spatula|Broad, short snout with two rows of upper teeth; can exceed 8 feet.
+rough|f|Bowfin|Amia calva;Amia ocellicauda|Long ribbon-like dorsal fin along most of the back; males show an eyespot at the base of the tail.
+rough|f|Common Carp|Cyprinus carpio|Large golden scales and two pairs of barbels at the corners of the mouth.
+rough|f|Grass Carp|Ctenopharyngodon idella|Torpedo-shaped with dark-edged scales in a net pattern; no barbels.
+rough|f|Lake Sturgeon|Acipenser fulvescens|Rows of bony plates (scutes), a shark-like tail and four barbels under a cone-shaped snout.
+rough|b|White Sturgeon|Acipenser transmontanus|North America's largest freshwater fish; gray, with 38–48 scutes along the side.
+rough|b|American Shad|Alosa sapidissima|Silvery herring with a dark shoulder spot followed by smaller spots; jaw reaches past the eye.
+rough|f|Burbot|Lota lota|The freshwater cod: a single chin barbel and long second dorsal and anal fins.
+rough|f|Freshwater Drum|Aplodinotus grunniens|Humped back, rounded tail and a lateral line that runs all the way into the tail.
+rough|f|American Paddlefish|Polyodon spathula|Long, flat, paddle-shaped snout; a giant filter feeder of big rivers.
+drum|s|Red Drum|Sciaenops ocellatus|Copper-bronze body with one or more black spots at the base of the tail.
+drum|s|Black Drum|Pogonias cromis|High-backed with many chin barbels; young fish show 4–5 broad dark vertical bars.
+drum|s|Spotted Seatrout|Cynoscion nebulosus|Round black spots on the back, dorsal fins and tail; one or two big canine teeth up front.
+drum|s|Weakfish|Cynoscion regalis|Fine dark speckles in wavy diagonal rows and yellowish lower fins.
+drum|s|Atlantic Croaker|Micropogonias undulatus|Small chin barbels, a brassy sheen and wavy diagonal bars; it croaks when caught.
+drum|s|White Seabass|Atractoscion nobilis|Pacific drum with a raised ridge along the belly; silvery bronze above.
+snap|s|Red Snapper|Lutjanus campechanus|Rosy red all over with a red eye and a pointed anal fin.
+snap|s|Gray Snapper|Lutjanus griseus|Gray-copper with prominent canine teeth; young fish show a dark stripe through the eye. Also called mangrove snapper.
+snap|s|Mutton Snapper|Lutjanus analis|Olive with a small black spot above the lateral line and blue lines on the face.
+snap|s|Yellowtail Snapper|Ocyurus chrysurus|Bright yellow stripe from snout to the deeply forked yellow tail.
+snap|s|Gag|Mycteroperca microlepis|Gray grouper with dark wormy markings and a slightly concave tail edge.
+snap|s|Red Grouper|Epinephelus morio|Reddish-brown with pale blotches and a straight-edged spiny dorsal fin.
+snap|s|Atlantic Goliath Grouper|Epinephelus itajara|Massive (up to about 800 lb), with a broad head, small eyes and rounded fins; protected.
+jack|s|Crevalle Jack|Caranx hippos|Blunt head, a black spot on the gill cover and a black spot on the pectoral fin.
+jack|s|Greater Amberjack|Seriola dumerili|Dark band from the snout through the eye toward the dorsal fin, plus an amber side stripe.
+jack|s|Permit|Trachinotus falcatus|Tall, deep silver body with long sickle-shaped dorsal and anal fins.
+jack|s|Florida Pompano|Trachinotus carolinus|Smaller and less deep than permit, with a yellow belly and fins.
+jack|s|California Yellowtail|Seriola dorsalis;Seriola lalandi|Pacific jack with a brassy yellow side stripe and a bright yellow tail.
+tuna|s|Atlantic Bluefin Tuna|Thunnus thynnus|Giant tuna with short pectoral fins and yellow finlets edged in black.
+tuna|s|Yellowfin Tuna|Thunnus albacares|Yellow finlets; adults grow long, sickle-shaped yellow second dorsal and anal fins.
+tuna|s|Albacore|Thunnus alalunga|Very long pectoral fins that reach past the start of the anal fin.
+tuna|s|Skipjack Tuna|Katsuwonus pelamis|Dark horizontal stripes on the silvery belly.
+tuna|s|Little Tunny|Euthynnus alletteratus|Wavy wormlike marks on the back and a few dark spots below the pectoral fin.
+tuna|s|Atlantic Bonito|Sarda sarda|Dark stripes slanting down and forward across the back.
+tuna|s|King Mackerel|Scomberomorus cavalla|Lateral line dips sharply below the second dorsal fin; no black on the front of the dorsal.
+tuna|s|Atlantic Spanish Mackerel|Scomberomorus maculatus|Gold-yellow oval spots and black at the front of the spiny dorsal fin.
+tuna|s|Wahoo|Acanthocybium solandri|Long beaklike snout and cobalt-blue tiger bars on a slender body.
+tuna|s|Atlantic Mackerel|Scomber scombrus|Wavy black bars across a green-blue back.
+pel|s|Sailfish|Istiophorus platypterus|Enormous sail-like dorsal fin and a long spear-shaped bill.
+pel|s|Blue Marlin|Makaira nigricans|Cobalt back with pale vertical bars; pointed dorsal fin lower than the body is deep.
+pel|s|Swordfish|Xiphias gladius|Long, flat, sword-shaped bill; adults have no scales and no pelvic fins.
+pel|s|Common Dolphinfish|Coryphaena hippurus|Electric green-gold with a dorsal fin running head to tail; bulls have a blunt forehead. Also called mahi-mahi.
+pel|s|Cobia|Rachycentron canadum|Flat broad head and a dark side stripe; looks like a small shark at the surface.
+pel|b|Atlantic Tarpon|Megalops atlanticus|Huge silver scales, an upturned bony mouth, and a long trailing last dorsal ray.
+pel|s|Bonefish|Albula vulpes|Silver with faint dark stripes and a cone-shaped snout overhanging the mouth.
+pel|b|Common Snook|Centropomus undecimalis|Bold black lateral line running into the tail; sloping forehead and protruding lower jaw.
+pel|s|Bluefish|Pomatomus saltatrix|Blue-green back, razor teeth and a black blotch at the base of the pectoral fin.
+pel|s|Great Barracuda|Sphyraena barracuda|Long and fanged, with scattered black blotches on the lower sides.
+bottom|s|Summer Flounder|Paralichthys dentatus|Left-eyed flatfish with five or more eyespots, often arranged in a triangle near the tail. Also called fluke.
+bottom|s|Southern Flounder|Paralichthys lethostigma|Left-eyed flatfish with diffuse, unringed spots.
+bottom|s|Winter Flounder|Pseudopleuronectes americanus|Right-eyed, thick-bodied flatfish with a small mouth.
+bottom|s|Pacific Halibut|Hippoglossus stenolepis|Right-eyed giant whose lateral line arches high over the pectoral fin.
+bottom|s|California Halibut|Paralichthys californicus|Large mouth reaching past the eye; lateral line arched over the pectoral fin.
+bottom|s|Tautog|Tautoga onitis|Blunt head, thick lips and crushing teeth; mottled dark body. Also called blackfish.
+bottom|s|Black Sea Bass|Centropristis striata|Dark with pale scale centers; big males have a blue hump and a long upper tail ray.
+bottom|s|Scup|Stenotomus chrysops|Flat silvery porgy with a steep forehead and small mouth.
+bottom|s|Sheepshead|Archosargus probatocephalus|5–6 black vertical bars and humanlike front teeth.
+bottom|s|Atlantic Cod|Gadus morhua|Chin barbel, pale lateral line, three dorsal fins and a speckled body.
+bottom|s|Haddock|Melanogrammus aeglefinus|Black lateral line and a dark "thumbprint" blotch above the pectoral fin.
+bottom|s|Pollock|Pollachius virens|Green back, pale lateral line and a jutting lower jaw. Also called saithe.
+bottom|s|Hogfish|Lachnolaimus maximus|Long piglike snout and three long streamer spines at the front of the dorsal fin.
+bottom|s|Lingcod|Ophiodon elongatus|Huge fanged mouth and long dorsal fin; flesh is sometimes blue-green.
+bottom|s|Kelp Bass|Paralabrax clathratus|Pale squarish blotches on a dark back; lives in Pacific kelp forests.
+bottom|s|Black Rockfish|Sebastes melanops|Dark gray-black with a mottled back; often schools in mid-water.
+bottom|s|California Sheephead|Bodianus pulcher;Semicossyphus pulcher|Males have a black head and tail, a red middle and a white chin; strong canine teeth.
+shark|s|Shortfin Mako Shark|Isurus oxyrinchus|Metallic blue with a pointed snout, crescent tail and visible curved teeth.
+shark|s|Blue Shark|Prionace glauca|Slender, indigo-blue, with very long pectoral fins.
+shark|s|Blacktip Shark|Carcharhinus limbatus|Black tips on most fins but not the anal fin.
+shark|b|Bull Shark|Carcharhinus leucas|Stocky, with a short blunt snout; travels far into fresh water.
+shark|s|Tiger Shark|Galeocerdo cuvier|Square snout and dark vertical bars that fade with age.
+shark|s|Great Hammerhead|Sphyrna mokarran|Nearly straight-edged hammer and a very tall sickle-shaped first dorsal fin.
+shark|s|Common Thresher Shark|Alopias vulpinus|Upper tail lobe about as long as the rest of the body.
+shark|s|Spiny Dogfish|Squalus acanthias|Small shark with white spots and a spine in front of each dorsal fin.

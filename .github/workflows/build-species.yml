@@ -1,0 +1,26 @@
+name: Build species list
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 3 * *'   # monthly refresh
+  push:
+    paths: [scripts/build_species.py, scripts/curated.tsv, .github/workflows/build-species.yml]
+permissions:
+  contents: write
+concurrency: build-species
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install duckdb==1.1.3 huggingface_hub==0.26.2
+      - run: python scripts/build_species.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add data/species.js data/build_report.txt
+          git commit -m "Rebuild species list from FishBase + iNaturalist" || echo "no changes"
+          git pull --rebase && git push
