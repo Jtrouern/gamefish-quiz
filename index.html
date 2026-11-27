@@ -55,6 +55,13 @@ main{padding-bottom:48px}
 .spin{position:absolute;width:44px;height:44px;border:4px solid #ffffff33;border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite}
 @keyframes sp{to{transform:rotate(1turn)}}
 @media(prefers-reduced-motion:reduce){.spin{animation:none}.plate img{transition:none}}
+.plate img{cursor:zoom-in}
+.ptools{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ptools button{min-height:40px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 14px "Source Sans 3",sans-serif;cursor:pointer}
+.ptools button:disabled{opacity:.45;cursor:default}
+.viewer{position:fixed;inset:0;z-index:50;background:rgba(4,12,15,.94);display:grid;place-items:center;padding:16px;cursor:zoom-out}
+.viewer img{max-width:100%;max-height:calc(100vh - 80px);object-fit:contain}
+.viewer p{color:#cfe3e1;font-size:14px;margin:8px 0 0;text-align:center}
 .credit{font-size:13px;color:var(--muted);margin-top:6px;overflow-wrap:anywhere}
 .side{display:grid;gap:14px}
 .meter{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:600}
@@ -77,7 +84,7 @@ main{padding-bottom:48px}
 .end ul{columns:2 220px;padding-left:18px}
 .guide{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-.card .ph{aspect-ratio:4/3;background:var(--plate)}.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.card .ph{aspect-ratio:4/3;background:var(--plate)}.card .ph img{width:100%;height:100%;object-fit:contain;display:block;cursor:zoom-in}
 .card .bd{padding:12px 14px;display:grid;gap:6px;flex:1}
 .card h3{font-size:20px}.card .meta{font-size:14px;color:var(--muted)}
 .card p{margin:0;font-size:15px}
@@ -136,11 +143,12 @@ footer{border-top:1px solid var(--line);font-size:14px;color:var(--muted);paddin
   <div class="intro" id="intro">
    <h2>Pick your water and cast off</h2>
    <p>Choose a state or province, freshwater or saltwater, and a field-guide section, then press <b>Load &amp; play</b>. The species list is every fish FishBase flags as a game fish in the US or Canada. A fish is included for your place if it is on FishBase's checklist for it or has iNaturalist observations there (or choose <b>Anywhere</b>). Photos come from that place when possible, otherwise from elsewhere in the species' range. Anadromous fish such as salmon, striped bass and shad count as both fresh and salt.</p>
-   <p>Keys: <b>1–6</b> to answer, <b>H</b> for a hint, <b>Enter</b> for the next fish.</p>
+   <p>Keys: <b>1–6</b> to answer, <b>H</b> for a hint, <b>P</b> for another photo, <b>F</b> for full size, <b>Enter</b> for the next fish. Click any photo to see it full size.</p>
   </div>
   <div class="game" id="game" hidden>
    <div>
     <div class="plate" id="plate"><div class="spin" id="spin"></div><img id="photo" alt=""><div class="marks" id="marks" hidden></div></div>
+    <div class="ptools"><button id="another" type="button">Another photo (P)</button><button id="zoom" type="button">Full size (F)</button></div>
     <div class="credit" id="credit"></div>
    </div>
    <div class="side">
@@ -160,6 +168,7 @@ footer{border-top:1px solid var(--line);font-size:14px;color:var(--muted);paddin
  </section>
 </main>
 
+<div class="viewer" id="viewer" hidden><div><img id="vimg" alt=""><p id="vcap"></p></div></div>
 <footer>
  <div class="wrap">
   Photos and occurrence data: <a href="https://www.inaturalist.org">iNaturalist</a> community observations (Creative Commons licensed; each photo credits its observer). Summaries: <a href="https://en.wikipedia.org">Wikipedia</a>. Species list and state checklists: <a href="https://www.fishbase.se">FishBase</a> via the <a href="https://huggingface.co/datasets/cboettig/fishbase">open FishBase data release</a>. A fish counts as "here" if it is on FishBase's checklist for the place or has iNaturalist observations there; neither is a complete range map, so check your state's fishing regulations before keeping fish.
@@ -278,15 +287,16 @@ async function photos(sp,pid){
  }
  const k=sp.inat+':'+pid; if(photoCache.has(k)) return photoCache.get(k);
  const base=`observations?taxon_id=${sp.inat}&photos=true&photo_license=${LIC}&per_page=40&order_by=votes`;
- const grab=(r,local)=>(r.results||[]).flatMap(o=>{const p=(o.photos||[])[0];return p&&p.url?[{src:p.url.replace('/square.','/large.'),attr:p.attribution,obs:o.id,where:o.place_guess||'',local}]:[]});
+ const grab=(r,local)=>(r.results||[]).flatMap(o=>(o.photos||[]).slice(0,4).filter(p=>p&&p.url).map((p,j)=>({src:p.url.replace('/square.','/large.'),full:p.url.replace('/square.','/original.'),attr:p.attribution,obs:o.id,n:j,where:o.place_guess||'',local})));
  let out=[];
  if(pid) out=grab(await api(base+`&quality_grade=research&place_id=${pid}`),true);
  if(out.length<3) out=out.concat(grab(await api(base+'&quality_grade=research'),false));
  if(out.length<3) out=out.concat(grab(await api(base+'&verifiable=true&quality_grade=needs_id'),false));
  if(!out.length){
   const r=await api(`taxa/${sp.inat}`), t=(r.results||[])[0];
-  for(const tp of (t&&t.taxon_photos)||[]){const p=tp.photo;if(p&&p.url&&p.license_code)out.push({src:(p.large_url||p.url.replace('/square.','/large.')),attr:p.attribution,obs:null,where:'',local:false})}
+  for(const tp of (t&&t.taxon_photos)||[]){const p=tp.photo;if(p&&p.url&&p.license_code)out.push({src:(p.large_url||p.url.replace('/square.','/large.')),full:p.original_url||p.url.replace('/square.','/original.'),attr:p.attribution,obs:null,n:0,where:'',local:false})}
  }
+ const seen=new Set(); out=out.filter(x=>!seen.has(x.src)&&seen.add(x.src));
  photoCache.set(k,out); return out;
 }
 const wikiCache=new Map();
@@ -355,24 +365,54 @@ async function next(){
  G.opts=opts;
  $('choices').innerHTML=opts.map((s,k)=>`<button data-k="${k}"><kbd>${k+1}</kbd><span>${esc(s.c)}</span></button>`).join('');
  let mode=settings.mode==='mix'?(Math.random()<.65?'photo':'marks'):settings.mode;
- const img=$('photo'),mk=$('marks');img.classList.remove('on');$('credit').textContent='';
+ const img=$('photo'),mk=$('marks');img.classList.remove('on');$('credit').textContent='';$('another').disabled=true;$('zoom').disabled=true;G.photos=null;
  if(mode==='photo'){
   mk.hidden=true;$('spin').hidden=false;
   try{
    const ph=await photos(sp,pid);
    if(G.cur!==sp) return;
    if(!ph.length) throw new Error('no photos');
-   const p=ph[Math.random()*ph.length|0]; G.photo=p;
-   img.onload=()=>{if(G.cur===sp){img.classList.add('on');$('spin').hidden=true}};
-   img.onerror=()=>{$('spin').hidden=true;showMarks(sp)};
-   img.alt='Mystery fish photo from iNaturalist'; img.src=p.src;
-   $('credit').textContent='Photo '+(p.attr||'')+' · iNaturalist';
+   G.photos=ph; G.shown=new Set();
+   // first pick: lead photo of a local observation if there is one
+   const lead=ph.filter(p=>p.n===0&&p.local), first=lead.length?lead:ph.filter(p=>p.n===0);
+   showPhoto(sp,(first.length?first:ph)[Math.random()*(first.length?first:ph).length|0]);
   }catch(e){if(G.cur===sp){$('spin').hidden=true;showMarks(sp)}}
  }else showMarks(sp);
  // warm the cache for the next fish
  const nx=G.deck[G.deck.length-1]; if(nx&&settings.mode!=='marks') photos(nx,pid).catch(()=>{});
 }
+function showPhoto(sp,p){
+ const img=$('photo'); G.photo=p; G.shown.add(p);
+ img.classList.remove('on'); $('spin').hidden=false;
+ img.onload=()=>{if(G&&G.cur===sp){img.classList.add('on');$('spin').hidden=true}};
+ img.onerror=()=>{if(!G||G.cur!==sp)return; const rest=G.photos.filter(x=>!G.shown.has(x)); if(rest.length) showPhoto(sp,rest[0]); else{$('spin').hidden=true;showMarks(sp)}};
+ img.alt='Mystery fish photo from iNaturalist'; img.src=p.src;
+ $('credit').textContent='Photo '+(p.attr||'')+' · iNaturalist';
+ $('another').disabled=G.photos.length<2; $('zoom').disabled=false;
+}
+function anotherPhoto(){
+ if(!G||!G.photo||!G.photos) return;
+ let rest=G.photos.filter(x=>!G.shown.has(x));
+ if(!rest.length){G.shown=new Set([G.photo]);rest=G.photos.filter(x=>x!==G.photo)}
+ if(!rest.length) return;
+ // prefer local photos, then other photos of the same observation, then anything
+ const pick=rest.find(x=>x.local&&x.obs!==G.photo.obs)||rest.find(x=>x.obs===G.photo.obs)||rest[Math.random()*rest.length|0];
+ showPhoto(G.cur,pick);
+}
+function openViewer(src,fallback,cap){
+ const v=$('viewer'),im=$('vimg');
+ im.onerror=()=>{if(fallback&&im.src!==fallback)im.src=fallback};
+ im.src=src; im.alt=G&&!G.answered?'Mystery fish, full size':cap||''; $('vcap').textContent=cap||''; v.hidden=false;
+}
+const closeViewer=()=>{$('viewer').hidden=true;$('vimg').removeAttribute('src')};
+function zoomPhoto(){ if(G&&G.photo) openViewer(G.photo.full||G.photo.src,G.photo.src,'Photo '+(G.photo.attr||'')+' · iNaturalist') }
+$('another').addEventListener('click',anotherPhoto);
+$('zoom').addEventListener('click',zoomPhoto);
+$('photo').addEventListener('click',zoomPhoto);
+$('viewer').addEventListener('click',closeViewer);
+$('cards').addEventListener('click',e=>{const im=e.target.closest('.card .ph img');if(im)openViewer(im.src.replace('/medium.','/original.'),im.src,im.title)});
 function showMarks(sp){
+ $('another').disabled=true;$('zoom').disabled=true;
  G.photo=null;$('photo').removeAttribute('src');$('photo').alt='';
  const mk=$('marks');mk.hidden=false;mk.innerHTML=`<div><small>${sp.tip?'Field marks':'Clues'} · ${esc(SECTIONS[sp.g])}</small>${esc(clue(sp))}</div>`;
  $('hint').disabled=true;
@@ -427,7 +467,10 @@ function finish(){
 $('quit').addEventListener('click',()=>{if(G){G.rounds=G.i-(G.answered?0:1);if(G.rounds<1){G=null;$('game').hidden=true;$('intro').hidden=false;return}finish()}});
 $('start').addEventListener('click',startGame);
 document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'&&!$('viewer').hidden){closeViewer();return}
  if(!G||$('game').hidden||e.target.tagName==='SELECT') return;
+ if(e.key==='p'||e.key==='P'){anotherPhoto();return}
+ if(e.key==='f'||e.key==='F'){$('viewer').hidden?zoomPhoto():closeViewer();return}
  if(/^[1-6]$/.test(e.key)) answer(+e.key-1);
  else if(e.key==='h'||e.key==='H') giveHint();
  else if(e.key==='Enter'&&G.answered){e.preventDefault();next()}
